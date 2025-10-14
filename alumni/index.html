@@ -1,0 +1,2707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.5/dist/flowbite.min.css" />
+  <link rel="stylesheet" href="/style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="icon" type="favicon" href="img/logo.png">
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet">
+
+
+
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="jquery-3.6.3.min.js"></script>
+
+  <script src="https://kit.fontawesome.com/46aac33939.js" crossorigin="anonymous"></script>
+
+  <title>Alumni</title>
+  <style>
+    /* Customizing the Scrollbar */
+
+    .material-symbols-outlined {
+      font-variation-settings: "FILL" 0, "wght" 400, "grad" 0, "opzs" 48;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-resizer {
+      background-color: #ffffff;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: hsla(201, 96%, 26%);
+      border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #212121;
+    }
+
+    /* Gallery Effects */
+    .box {
+      flex: 1;
+      overflow: hidden;
+      transition: 0.5s;
+      line-height: 0;
+    }
+
+    .box>img {
+      width: 100%;
+      height: 100%;
+      border: 0.2rem solid white;
+      border-radius: 8px;
+      -o-object-fit: cover;
+      object-fit: cover;
+      transition: ease 0.75s;
+    }
+
+    .box:hover {
+      flex: 1 1 30%;
+      /* box-shadow: 0px 6px 6px rgba(73, 73, 73, 0.65); */
+      z-index: 1;
+      cursor: pointer;
+    }
+
+    .box:hover>img {
+      opacity: 1;
+      width: 100%;
+      height: 100%;
+    }
+
+
+    .base-image {
+      margin-top: 40px;
+      background-image: url("public/assets/images/nitj3.jpg"),
+        linear-gradient(rgb(255, 255, 255), rgba(4, 4, 4));
+      mask-image: linear-gradient(0deg, white, white, white, transparent);
+      -webkit-mask-image: linear-gradient(0deg,
+          white,
+          white,
+          white,
+          transparent);
+      background-color: #cccccc;
+      height: 400px;
+      background-position: 0% 28%;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+     /* 🔹 Contribute Button with Image */
+  .contribute-btn {
+    position: fixed;
+    top: 110px;
+    right: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+  }
+
+  .contribute-btn img {
+    width: 65px;
+    height: 65px;
+    border: 3px solid #97741a;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff;
+    object-fit: cover;
+  }
+
+  .contribute-btn span {
+    color: #FFD66E;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 0 0 8px rgba(255, 214, 110, 0.7);
+  }
+
+  .contribute-btn:hover img {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #FFD66E;
+  }
+
+  .contribute-btn:hover span {
+    color: #fff;
+  }
+
+  /* 🔹 Fullscreen Overlay */
+  .contribute-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    animation: fadeIn 0.4s ease forwards;
+  }
+
+  .contribute-overlay.active {
+    display: flex;
+  }
+
+  .contribute-btn img {
+  width: 65px;
+  height: 65px;
+  border: 3px solid #97741a;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff;
+  object-fit: contain;
+}
+
+  .contribute-overlay h1 {
+    font-size: 3rem;
+    color: #FFD66E;
+    font-family: 'Times New Roman', serif;
+    text-shadow: 0 0 20px #00ff00;
+  }
+
+  .close-contribute {
+    position: absolute;
+    top: 25px;
+    right: 40px;
+    font-size: 40px;
+    color: #FFD66E;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .close-contribute:hover {
+    color: #ff4a4a;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @media screen and (max-width: 700px) {
+    .contribute-btn img {
+      width: 55px;
+      height: 55px;
+    }
+    .contribute-overlay img {
+      width: 90%;
+    }
+    .contribute-overlay h1 {
+      font-size: 2rem;
+    }
+  }
+
+
+    .base-image-2 {
+      margin-top: 40px;
+      background-image: url("public/assets/images/nitj3.jpg"),
+        linear-gradient(rgb(255, 255, 255), rgba(4, 4, 4));
+      background-color: #cccccc;
+      height: 300px;
+      background-position: 58% 28%;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .main-shadow {
+      text-shadow: rgb(0 0 0) 6px -1px 5px;
+    }
+
+    .carousel-open:checked+.carousel-item {
+      position: static;
+      opacity: 100;
+    }
+
+    .carousel-item {
+      -webkit-transition: opacity 0.9s ease-in-out;
+      transition: opacity 1s ease-in-out 0.2s;
+    }
+
+    #carousel-1:checked~.control-1,
+    #carousel-2:checked~.control-2,
+    #carousel-3:checked~.control-3,
+    #carousel-4:checked~.control-4 {
+      display: block;
+    }
+
+    .carousel-indicators {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      bottom: 2%;
+      left: 0;
+      right: 0;
+      text-align: center;
+      z-index: 10;
+    }
+
+    #menu .menu-content ul li.selected a {
+      color: hsla(201, 96%, 26%);
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    #menu .menu-content .extra-links a.extra-selected {
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    @media screen and (min-width: 640px) {
+      .marquee-tag {
+        clip-path: polygon(100% 0%, 100% 44%, 100% 100%, 2% 100%, 0% 50%, 2% 0%);
+      }
+    }
+  </style>
+<style>
+  /* ===========================
+     GLOBAL STYLES
+  /* ============================ */
+  /* body { */
+    /* font-family: 'Poppins', sans-serif; */
+    /* background-color: #f9fafb; */
+    /* margin: 0; */
+    /* padding: 0; */
+  /* } */ */
+/* 
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: #111827;
+  } */
+
+  /* a {
+    text-decoration: none;
+    color: inherit;
+  } */
+/* 
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  } */
+
+  /* ===========================
+     CONTENT WRAPPER
+  ============================ */
+  .contentWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* For cases where sidebar or gallery share space */
+  .contentWrapper > * {
+    flex: 1;
+  }
+
+  /* ===========================
+     GALLERY CONTAINER
+  ============================ */
+ /* === Alumni Page Gallery Section === */
+.gallery-row {
+  display: flex;
+  height: 22vh;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.box {
+  flex: 1;
+  overflow: hidden;
+  line-height: 0;
+  transition: flex 0.5s ease, transform 0.4s ease;
+}
+
+.box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  transition: transform 0.6s ease, opacity 0.4s ease;
+}
+
+/* Hover effect: enlarge one, shrink others */
+.gallery-row:hover .box {
+  flex: 0.8;
+}
+
+.gallery-row:hover .box:hover {
+  flex: 2;
+  z-index: 10;
+}
+
+.box:hover img {
+  transform: scale(1.05);
+  opacity: 1;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Keep same height always */
+.gallery-row, .box, .box img {
+  height: 22vh;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .gallery-row {
+    height: 18vh;
+  }
+}
+@media (max-width: 480px) {
+  .gallery-row {
+    flex-direction: column;
+    height: auto;
+  }
+  .box, .box img {
+    height: 25vh;
+  }
+}
+
+
+  /* ===========================
+     SCROLLBAR STYLING
+  ============================ */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #9ca3af;
+    border-radius: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #6b7280;
+  }
+
+  /* ===========================
+     RESPONSIVE DESIGN
+  ============================ */
+  @media (max-width: 1024px) {
+    .contentWrapper {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .gallery-row {
+      height: 18vh;
+      gap: 0.4rem;
+    }
+
+    #gallery-content {
+      gap: 0.4rem;
+    }
+
+    .contentWrapper {
+      padding: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .gallery-row {
+      flex-direction: column;
+      height: auto;
+    }
+
+    .gallery-img {
+      height: 25vh;
+    }
+  }
+</style>
+
+<style>
+    /* General styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      width: 16rem;
+      background-color: #f9fafb;
+      border-right: 1px solid #e5e7eb;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      z-index: 50;
+      overflow-y: auto;
+    }
+    
+    /* Main content area - FIXED */
+    .main-content-wrapper {
+      margin-left: 16rem;
+      width: calc(100% - 16rem);
+      min-height: 100vh;
+    }
+    
+    /* Remove the conflicting .main class that was causing issues */
+    .main-content-wrapper .main {
+      margin-left: 0;
+      width: 100%;
+    }
+
+    /* Collapsible menu styles */
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    
+    .collapsible-content.open {
+      max-height: 500px;
+    }
+
+    /* Your existing gallery, modal, and other styles remain the same */
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .gallery-row {
+      display: flex;
+      height: 22vh;
+      gap: 0.5rem;
+    }
+    
+    .gallery-img {
+      flex: 1;
+      object-fit: cover;
+      border-radius: 0.75rem;
+      transition: all 0.5s ease-in-out;
+      cursor: pointer;
+    }
+    
+    .gallery-row:hover .gallery-img {
+      opacity: 0.8;
+      transform: scale(0.98);
+      flex: 0.8;
+    }
+    
+    .gallery-img:hover {
+      transform: scale(1.05);
+      z-index: 10;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      flex: 2;
+      opacity: 1;
+    }
+
+    /* Your original modal and animation styles */
+    .main {
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+      background: #333;
+    }
+
+    .main img {
+      max-width: 100%;
+      vertical-align: middle;
+      border: 5px solid #FFD66E;
+      box-sizing: border-box;
+      transition: opacity .2s;
+    }
+
+    .main:hover img {
+      opacity: 0.5;
+    }
+
+    .main img:hover {
+      opacity: 1;
+    }
+
+    .main .single-column {
+      width: 33.33%;
+      animation: var(--animation, none) 16s infinite linear;
+    }
+
+    .main .single-column:hover {
+      animation-play-state: paused;
+    }
+
+    .main .single-column:nth-of-type(odd) {
+      align-self: flex-end;
+      --direction: 50%;
+    }
+
+    .tooltiptext {
+      visibility: hidden;
+      width: 180px;
+      background-color: rgb(255, 255, 255);
+      color: #000;
+      text-align: center;
+      border-radius: 15px;
+      padding: 0px;
+      margin-left: 10%;
+      position: absolute;
+      z-index: 1;
+    }
+    
+    #meet_16dec2023:hover .tooltiptext{
+      visibility: visible;
+    }
+
+    @keyframes slide {
+      to {
+        -webkit-transform: translateY(var(--direction, -50%));
+        transform: translateY(var(--direction, -50%));
+      }
+    }
+    
+    .font-times{
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .modal-image {
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .modal-image:hover {
+      opacity: 0.7;
+    }
+    
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 1; 
+      padding-top: 100px; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto; 
+      background-color: rgb(0, 0, 0); 
+      background-color: rgba(0, 0, 0, 0.9); 
+    }
+    
+    .modal-content {
+      margin: auto;
+      width: 100%;
+      max-width: 700px;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    }
+    
+    @keyframes zoom {
+      from {
+        transform: scale(0);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+    
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #ff3939;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    @media only screen and (max-width: 700px) {
+      .modal-content {
+        width: 100%;
+      }
+    }
+</style>
+  <style>
+      .main-content-wrapper .main{
+      margin-left: 16rem;
+      width: calc(100% - 16rem);
+      min-height: 100vh;
+    }
+    
+    /* Remove the conflicting .main class that was causing issues */
+    .main-content-wrapper .main {
+      margin-left: 0;
+      width: 100%;
+    }
+    .main {
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+      background: #333;
+    }
+
+    .main img {
+      max-width: 100%;
+      vertical-align: middle;
+      border: 5px solid #FFD66E;
+      box-sizing: border-box;
+      transition: opacity .2s;
+    }
+
+    .main:hover img {
+      opacity: 0.5;
+    }
+
+    .main img:hover {
+      opacity: 1;
+    }
+
+    .main .single-column {
+      width: 33.33%;
+      animation: var(--animation, none) 16s infinite linear;
+    }
+
+    .main .single-column:hover {
+      animation-play-state: paused;
+    }
+
+    .main .single-column:nth-of-type(odd) {
+      align-self: flex-end;
+      --direction: 50%;
+    }
+
+    .tooltiptext {
+      visibility: hidden;
+      width: 180px;
+      background-color: rgb(255, 255, 255);
+      color: #000;
+      text-align: center;
+      border-radius: 15px;
+      padding: 0px;
+      margin-left: 10%;
+
+      /* Position the tooltip */
+      position: absolute;
+      z-index: 1;
+    }
+    #meet_16dec2023:hover .tooltiptext{
+      visibility: visible;
+    }
+
+    @keyframes slide {
+      to {
+        -webkit-transform: translateY(var(--direction, -50%));
+        transform: translateY(var(--direction, -50%));
+      }
+    }
+    .font-times{
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+
+
+
+    .modal-image {
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .modal-image:hover {
+      opacity: 0.7;
+    }
+    
+    
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 1; 
+      padding-top: 100px; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto; 
+      background-color: rgb(0, 0, 0); 
+      background-color: rgba(0, 0, 0, 0.9); 
+    }
+    
+    .modal-content {
+      margin: auto;
+      width: 100%;
+      max-width: 700px
+    }
+    
+    
+    .modal-content {
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    }
+    
+    @keyframes zoom {
+      from {
+        transform: scale(0);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+    
+    
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #ff3939;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    /* 100% Image Width on Smaller Screens */
+    @media only screen and (max-width: 700px) {
+      .modal-content {
+        width: 100%;
+      }
+    }
+    
+  </style>
+  <style>
+    /* General styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      width: 16rem; /* 64 * 0.25rem = 16rem */
+      background-color: #f9fafb;
+      border-right: 1px solid #e5e7eb;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      z-index: 50;
+      overflow-y: auto;
+    }
+    
+    /* Main content area */
+    .main  {
+      margin-left: 16rem; /* Same as sidebar width */
+      min-height: 100vh;
+      width: calc(100% - 16rem);
+    }
+    
+    /* Collapsible menu styles */
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    
+    .collapsible-content.open {
+      max-height: 500px; /* Adjust as needed */
+    }
+    
+    /* Gallery styles */
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .gallery-row {
+      display: flex;
+      height: 22vh;
+      gap: 0.5rem;
+    }
+    
+    .gallery-img {
+      flex: 1;
+      object-fit: cover;
+      border-radius: 0.75rem;
+      transition: all 0.5s ease-in-out;
+      cursor: pointer;
+    }
+    
+    .gallery-row:hover .gallery-img {
+      opacity: 0.8;
+      transform: scale(0.98);
+      flex: 0.8;
+    }
+    
+    .gallery-img:hover {
+      transform: scale(1.05);
+      z-index: 10;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      flex: 2;
+      opacity: 1;
+    }
+    
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+    
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    }
+    
+    @keyframes zoom {
+      from {transform: scale(0)}
+      to {transform: scale(1)}
+    }
+    
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    /* Hero section */
+    .hero {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin-bottom: 3rem;
+      overflow: hidden;
+    }
+    
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -10;
+    }
+    
+    /* Content sections */
+    .section {
+      background-color: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      margin: 2rem auto;
+      padding: 1.5rem;
+      max-width: 68vw;
+    }
+    
+    /* Tooltip */
+    .tooltip {
+      position: relative;
+    }
+    
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 180px;
+      background-color: white;
+      color: #000;
+      text-align: center;
+      border-radius: 15px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -90px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+
+</head>
+
+<body class="h-screen overflow-x-hidden">
+
+ <nav class="sidebar">
+    <!-- Logo & Title -->
+    <div class="p-5 overflow-y-auto">
+      <div class="flex items-center mb-6">
+        <a href="/alumni/alumni.html" target="_blank">
+          <img src="img/logo.png" alt="logo" class="h-10 w-10 mr-3" />
+        </a>
+        <div class="text-[#0054A6] text-sm font-bold leading-tight">
+          <div>NITJ Alumni</div>
+          <div class="text-xs text-gray-600">
+            Dr. B R Ambedkar NIT Jalandhar
+          </div>
+        </div>
+      </div>
+ <div class="p-5 border-t border-gray-200">
+      <a href="https://nitj.ac.in/alumni_fundraising/login" target="_blank">
+        <button
+          class="bg-[#0054A6] w-full text-white py-2 px-4 rounded-md shadow-md border-2 border-[#FFD66E] text-sm hover:scale-105 hover:-translate-y-1 transition-all duration-300"
+        >
+          LOGIN
+        </button>
+      </a>
+    </div>
+      <!-- Menu -->
+      <ul class="space-y-2 text-sm">
+        <!-- 1. Home -->
+        <li>
+          <a
+            href="/index.html"
+            class="flex items-center text-[#0054A6] bg-[#E6F0FB] rounded-md px-3 py-2 font-bold transition-all duration-300 hover:bg-[#dbeafe]"
+          >
+            <!-- <i class="fa-solid fa-house mr-2"></i> -->
+            1. Home
+          </a>
+        </li>
+
+        <!-- 2. Alumni Affair Cell -->
+        <li>
+          <button
+            class="w-full text-left px-3 py-2 rounded-md hover:bg-[#f1f5f9] transition-all duration-300 font-bold text-gray-800 flex justify-between items-center menu-toggle"
+            data-target="affairCell"
+          ><a href="/alumni/aac.html" class="block px-2 py-1 hover:text-[#0054A6]">
+            2. Alumni Affair Cell</a>
+            <i class="fa-solid fa-chevron-down text-xs ml-2"></i>
+          </button>
+          <ul
+            id="affairCell"
+            class="collapsible-content ml-5 text-gray-600 space-y-1"
+          >
+            <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">2.1 Officer Bearer</a></li>
+            <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">2.2 SARC</a></li>
+          </ul>
+        </li>
+
+        <!-- 3. NITJAA -->
+        <li>
+          <button
+            class="w-full text-left px-3 py-2 rounded-md hover:bg-[#f1f5f9] transition-all duration-300 font-bold text-gray-800 flex justify-between items-center menu-toggle"
+            data-target="nitjaa"
+          ><a href="/alumni/nitjaa.html" class="block px-2 py-1 hover:text-[#0054A6]">
+            3. NITJAA</a>
+            <i class="fa-solid fa-chevron-down text-xs ml-2"></i>
+          </button>
+        <ul id="nitjaa" class="collapsible-content ml-5 text-gray-600 space-y-1">
+            <!-- ✅ Smooth scroll links -->
+            <li><a href="#home-nitjaa" class="block px-2 py-1 hover:text-[#0054A6]">3.1 Home</a></li>
+            <li><a href="#officer-bearer" class="block px-2 py-1 hover:text-[#0054A6]">3.2 Officer Bearer</a></li>
+            <li><a href="#membership" class="block px-2 py-1 hover:text-[#0054A6]">3.3 Membership</a></li>
+            <li><a href="#activities" class="block px-2 py-1 hover:text-[#0054A6]">3.4 Activities</a></li>
+            <li><a href="#bylaws" class="block px-2 py-1 hover:text-[#0054A6]">3.5 Bylaws</a></li>
+          </ul>
+        </li>
+
+        <!-- 4. Chapters -->
+        <li>
+          <button
+            class="w-full text-left px-3 py-2 rounded-md hover:bg-[#f1f5f9] transition-all duration-300 font-bold text-gray-800 flex justify-between items-center menu-toggle"
+            data-target="chapters"
+          ><a href="/alumni/chapters.html" class="block px-2 py-1 hover:text-[#0054A6]">
+            4. Chapters</a>
+            <i class="fa-solid fa-chevron-down text-xs ml-2"></i>
+          </button>
+          <ul
+            id="chapters"
+            class="collapsible-content ml-5 text-gray-600 space-y-2"
+          >
+            <!-- 4.1 NCR Chapter -->
+            <li>
+              <button
+                class="w-full text-left px-2 py-1 rounded hover:bg-gray-100 transition-all font-semibold flex justify-between items-center menu-toggle"
+                data-target="ncrChapter"
+              >
+                4.1 NCR Chapter
+                <i class="fa-solid fa-chevron-down text-xs ml-2"></i>
+              </button>
+              <ul
+                id="ncrChapter"
+                class="ml-4 space-y-1"
+              >
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.1.1 Home</a></li>
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.1.2 Officer Bearer</a></li>
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.1.3 Membership</a></li>
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.1.4 Bylaws</a></li>
+              </ul>
+            </li>
+
+            <!-- 4.2 USA Chapter -->
+            <li>
+              <button
+                class="w-full text-left px-2 py-1 rounded hover:bg-gray-100 transition-all font-semibold flex justify-between items-center menu-toggle"
+                data-target="usaChapter"
+              >
+                4.2 USA Chapter
+                <i class="fa-solid fa-chevron-down text-xs ml-2"></i>
+              </button>
+              <ul
+                id="usaChapter"
+                class=" ml-4 space-y-1"
+              >
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.2.1 Home</a></li>
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.2.2 Officer Bearer</a></li>
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.2.3 Membership</a></li>
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.2.4 Bylaws</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <!-- 5. Giving Back -->
+        <li>
+          <a
+            href="givingback.html"
+            target="_blank"
+            class="block px-3 py-2 rounded-md hover:bg-[#f1f5f9] font-bold text-gray-800 transition-all duration-300"
+          >
+            5. Giving Back
+          </a>
+        </li>
+
+        <!-- 6. Contact -->
+        <li>
+          <a
+            href="#contact_reference"
+            class="block px-3 py-2 rounded-md hover:bg-[#f1f5f9] font-bold text-gray-800 transition-all duration-300"
+          >
+            6. Contact
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Bottom Login Button -->
+   
+  </nav>
+
+
+<!-- ✅ JS for Toggle Behavior -->
+<script>
+  let activeMenu = null; // Keep track of the currently open menu
+
+  function toggleMenu(id) {
+    const menu = document.getElementById(id);
+
+    // If clicking the same menu, toggle it
+    if (activeMenu === menu) {
+      menu.style.maxHeight = menu.style.maxHeight ? null : menu.scrollHeight + "px";
+      return;
+    }
+
+    // Close the previously open menu
+    if (activeMenu) {
+      activeMenu.style.maxHeight = null;
+    }
+
+    // Open the new menu
+    menu.style.maxHeight = menu.scrollHeight + "px";
+    activeMenu = menu;
+  }
+
+  // Add hover behavior: when hovering over another list, switch menus
+  document.addEventListener("mouseover", (e) => {
+    const parentLi = e.target.closest("[data-menu-id]");
+    if (!parentLi) return; // Skip if not hovering over a menu trigger
+
+    const menuId = parentLi.getAttribute("data-menu-id");
+    const menu = document.getElementById(menuId);
+
+    if (menu && activeMenu !== menu) {
+      if (activeMenu) activeMenu.style.maxHeight = null; // Close previous
+      menu.style.maxHeight = menu.scrollHeight + "px"; // Open new
+      activeMenu = menu;
+    }
+  });
+</script>
+
+<div class="main-content-wrapper">
+<!-- PAGE CONTENT (pushes content right of sidebar) -->
+<!-- <div class="ml-64 p-8">
+  <h1 class="text-3xl font-bold text-[#0054A6]">Welcome to NITJAA Page</h1>
+  <p class="text-gray-600 mt-4">Your main content goes here. Scroll the page — the sidebar will stay fixed.</p>
+</div> -->
+
+
+
+
+
+  <div class="relative max-w-screen flex items-center justify-center h-screen mb-12 overflow-hidden">
+    <!-- <p> Supported by Sarthak Sharma </p> -->
+    <div class="relative z-30 p-5 text-white bg-opacity-50 rounded-xl flex-none">
+      <div class="text-xl md:text-4xl lg:text-5xl font-semibold italic animate-pulse md:py-2">
+        Welcome Home!
+      </div>
+      <!-- <div class="text-base md:text-4xl lg:text-5xl font-semibold italic ">
+        Your alma mater needs your support<br>
+        It&apos;s now time to give back
+      </div> -->
+    </div>
+   <img
+  src="img/image.png"
+  alt="NITJ Campus Aerial View"
+  class="fixed -z-10 w-auto min-w-full min-h-full max-w-none"
+/>
+
+  </div>
+
+
+  <div class="max-w-screen relative bg-[#fDfDfD] md:-top-80 w-full">
+
+    
+
+
+
+    <!-- </div>  -->
+<div class="basis-3/5">
+  <div id="gallery">
+    <!-- Title -->
+    <div class="flex items-center justify-start mb-10 space-x-6 group">
+      <!-- <h1 class="text-4xl font-semibold uppercase text-accent">
+        Photo <span class="text-dark-purple">Gallery</span>
+      </h1>
+      <span class="material-symbols-outlined group-hover:animate-shake animate-delay"
+        style="font-size: 40px; color: var(--accent)">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="40" viewBox="0 -960 960 960"
+          width="40">
+          <path
+            d="M189.058-113.304q-30.994 0-53.374-22.38-22.38-22.38-22.38-53.374v-581.884q0-31.06 22.38-53.486 22.38-22.427 53.374-22.427h581.884q31.06 0 53.486 22.427 22.427 22.426 22.427 53.486v581.884q0 30.994-22.427 53.374-22.426 22.38-53.486 22.38H189.058Zm0-75.754h581.884v-581.884H189.058v581.884Zm44.848-86.551h492.855l-151.428-203.71-128 167.334-92-124.667-121.427 161.043Zm-44.848 86.551v-581.884 581.884Zm151.02-373.065q24.148 0 40.974-16.904 16.825-16.903 16.825-41.051 0-24.148-16.904-40.974-16.903-16.825-41.051-16.825-24.148 0-40.974 16.904-16.825 16.903-16.825 41.051 0 24.148 16.904 40.974 16.903 16.825 41.051 16.825Z" />
+        </svg> -->
+      <!-- </span> -->
+    </div>
+
+    <!-- Actual gallery images -->
+    <div id="gallery-content" class="space-y-2 overflow-hidden">
+      <div class="gallery-row">
+        <div class="box"><img src="./img/utkansh19/1.jpg" alt=""></div>
+        <div class="box"><img src="./img/utkansh19/2.jpg" alt=""></div>
+        <div class="box"><img src="./img/utkansh19/3.jpg" alt=""></div>
+        <div class="box"><img src="./img/utkansh19/4.jpg" alt=""></div>
+      </div>
+      <div class="gallery-row">
+        <div class="box"><img src="./img/alumni_meet/image-026.jpg" alt=""></div>
+        <div class="box"><img src="./img/alumni_meet/image-027.jpg" alt=""></div>
+        <div class="box"><img src="./img/alumni_meet/image-028.jpg" alt=""></div>
+        <div class="box"><img src="./img/alumni_meet/image-029.jpg" alt=""></div>
+      </div>
+      <div class="gallery-row">
+        <div class="box"><img src="./img/college_img/1.jpg" alt=""></div>
+        <div class="box"><img src="./img/college_img/2.jpg" alt=""></div>
+        <div class="box"><img src="./img/college_img/3.jpg" alt=""></div>
+        <div class="box"><img src="./img/college_img/4.jpg" alt=""></div>
+      </div>
+    </div>
+  </div>
+
+  
+  </div>
+</div>
+
+
+
+
+    
+    <div class="grid items-center justify-center p-3 sm:p-5 bg-[#f5f5f5]  bg-center ">
+      <!--UPCOMING EVENT STARTS-->
+      <div class="mx-2 sm:mx-12 lg:mx-20 mt-5 sm:mt-6 lg:mt-20 flex align-middle">
+        <div>
+          <div
+            class="text-[#2167A7] text-xl sm:text-2xl lg:text-[1.75rem] font-bold lg:mx-4 mb-4 lg:mb-8 w-44 sm:w-52 lg:w-64">
+            UPCOMING EVENTS
+          </div>
+        </div>
+         <div class="w-full mt-3 lg:mt-5">
+          <hr
+            class="border-[0.2rem] lg:border-[0.22rem]  border-[#277BC7] border-solid border-t-0 border-x-0 lg:border-t-0 lg:border-x-0 rounded mb-6">
+         </div>
+      </div>
+
+      <h2
+        class="text-lg sm:text-xl lg:text-[1.6rem] font-bold mt-3 md:mt-5 lg:mt-14 mb-4 sm:mb-5 lg:mb-8 mx-2 sm:mx-12 lg:mx-24 align-left">
+        <p><a href="https://www.nitj.ac.in/template/index.html?id=67b850528b69e0412f1149a0?category=newpage">Annual Alumni Meet and Silver Jubilee Celebration on 22nd December 2025 </a><img class="inline" src="https://v1.nitj.ac.in//images/New.gif"/></p>
+      </h2>
+      <!--UPCOMING EVENT ENDS-->
+
+     <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recent Events</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome for arrows -->
+  <script src="https://kit.fontawesome.com/a2e0e6adf3.js" crossorigin="anonymous"></script>
+
+  <!-- Optional: Smooth Scrollbar Hide -->
+  <style>
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+
+<div class="bg-[#f9fafb] text-gray-800 font-sans">
+
+  <!-- ====== RECENT EVENTS SECTION ====== -->
+  <section id="recent-events" class="my-20 scroll-mt-36">
+    <div class="container mx-auto flex flex-col justify-start gap-10 px-6 lg:px-20">
+
+      <!-- Header -->
+      <div class="flex items-center justify-start space-x-6 group">
+        <h1 class="text-3xl font-semibold uppercase md:text-4xl text-[#2167A7]">
+          Recent <span class="text-dark-purple">Events</span>
+        </h1>
+        <span
+          class="material-symbols-outlined group-hover:animate-shake animate-delay"
+          style="font-size: 40px; color: #2167A7;"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="40" viewBox="0 -960 960 960" width="48">
+            <path
+              d="M77.109-74.5q23.239-67.717 36.195-146.076 12.957-78.359 16.196-173.315-42.24-13.957-68.62-53.674Q34.5-487.283 34.5-536v-63.826Q151.174-640.304 272.489-720T480-887.652Q566.196-799.696 687.63-720q121.435 79.696 237.87 120.174V-536q0 48.717-25.88 88.435-25.881 39.717-68.12 53.674 2.239 90.717 15.576 170.195 13.337 79.479 36.815 149.196H77.109ZM189.043-596h581.914q-73-37-145.479-87.239Q553-733.478 480-798.478q-69 62-142.478 113.239Q264.043-634 189.043-596Z"
+            />
+          </svg>
+        </span>
+      </div>
+
+      <!-- Divider -->
+      <hr class="border-[0.2rem] border-[#2167A7] border-solid border-t-0 border-x-0 rounded mb-2">
+
+      <!-- Cards Container -->
+      <div class="relative flex flex-row">
+        <i
+          class="absolute self-center hidden pl-4 text-3xl text-[#2167A7] -translate-y-1/2 cursor-pointer md:block top-1/2 -left-10 fa-solid fa-angle-left hover:text-sky-600 transition-colors"
+          onclick="slideCards(this,'left')"
+        ></i>
+
+        <div id="event-cards" class="scrollbar-hide flex space-x-6 overflow-x-scroll pl-1 pt-8 scroll-smooth h-[30rem]">
+          
+          <!-- Card 1 -->
+          <div class="flex flex-col w-72 h-full overflow-hidden border-t-4 border-b-4 shadow-xl rounded-xl bg-white border-[#2167A7]">
+            <img src="https://nitj.ac.in/files/1755600914898-1000121755.jpg" alt="Event" class="w-full h-44 object-cover rounded-t-lg">
+            <div class="flex flex-col flex-grow p-4">
+              <h2 class="font-bold text-lg text-[#2167A7] mb-2">
+                Inspiring Guest Lecture by Dr. Rohit Arora
+                <img src="https://v1.nitj.ac.in//images/New.gif" class="inline w-6 h-4">
+              </h2>
+              <p class="text-sm text-justify flex-grow">
+                The department hosted Dr. Rohit Arora, alumnus of Batch-2014, for an inspiring lecture on 14th August 2025.
+              </p>
+              <a href="https://www.nitj.ac.in/template/index.html?id=68a4588b95ee0cb861df4f90?category=newpage" class="mt-3 text-[#277BC7] font-semibold hover:underline">Read More →</a>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="flex flex-col w-72 h-full overflow-hidden border-t-4 border-b-4 shadow-xl rounded-xl bg-white border-[#2167A7]">
+            <img src="https://nitj.ac.in/files/1755600466924-1000121294.jpg" alt="Event" class="w-full h-44 object-cover rounded-t-lg">
+            <div class="flex flex-col flex-grow p-4">
+              <h2 class="font-bold text-lg text-[#2167A7] mb-2">
+                Alumni Lecture by Mr. Vipul Sharma
+                <img src="https://v1.nitj.ac.in//images/New.gif" class="inline w-6 h-4">
+              </h2>
+              <p class="text-sm text-justify flex-grow">
+                Mr. Vipul Sharma, alumnus of Batch-2009, delivered an insightful alumni lecture on 13th August 2025.
+              </p>
+              <a href="https://www.nitj.ac.in/template/index.html?id=68a456fe95ee0cb861df1b37?category=newpage" class="mt-3 text-[#277BC7] font-semibold hover:underline">Read More →</a>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="flex flex-col w-72 h-full overflow-hidden border-t-4 border-b-4 shadow-xl rounded-xl bg-white border-[#2167A7]">
+            <img src="https://nitj.ac.in/files/1754633298335-4.jpeg" alt="Event" class="w-full h-44 object-cover rounded-t-lg">
+            <div class="flex flex-col flex-grow p-4">
+              <h2 class="font-bold text-lg text-[#2167A7] mb-2">
+                NITJ Organized an Interactive Session with IAS Alumni
+              </h2>
+              <p class="text-sm text-justify flex-grow">
+                An inspiring session with IAS alumni Amit Dixit and Sadaf Malik was held at IT Block on August 7, 2025.
+              </p>
+              <a href="https://www.nitj.ac.in/template/index.html?id=689595e81f5cb6fc3b30181c?category=latestEvent" class="mt-3 text-[#277BC7] font-semibold hover:underline">Read More →</a>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="flex flex-col w-72 h-full overflow-hidden border-t-4 border-b-4 shadow-xl rounded-xl bg-white border-[#2167A7]">
+            <img src="https://nitj.ac.in/files/1754633298335-5.jpeg" alt="Event" class="w-full h-44 object-cover rounded-t-lg">
+            <div class="flex flex-col flex-grow p-4">
+              <h2 class="font-bold text-lg text-[#2167A7] mb-2">
+                Tech Society Seminar on AI Innovations
+              </h2>
+              <p class="text-sm text-justify flex-grow">
+                A seminar on Artificial Intelligence and emerging tech trends was organized by the Tech Society on 9th August 2025.
+              </p>
+              <a href="#" class="mt-3 text-[#277BC7] font-semibold hover:underline">Read More →</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Arrow -->
+        <i
+          class="self-center hidden p-4 text-3xl text-[#2167A7] cursor-pointer md:block fa-solid fa-angle-right hover:text-sky-600 transition-colors"
+          onclick="slideCards(this,'right')"
+        ></i>
+      </div>
+
+      <!-- View All -->
+      <div class="flex items-end w-fit mt-6">
+        <a class="text-[#2167A7] hover:text-sky-600" href="/template/index.html?id=0?category=latestEvent">
+          <span class="font-semibold hover:underline">View All →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Script -->
+  <script>
+    function slideCards(el, dir) {
+      const container = el.parentElement.querySelector('#event-cards');
+      const scrollAmount = container.offsetWidth * 0.8;
+      container.scrollBy({ left: dir === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+    }
+  </script>
+
+
+<script>
+  function slideCards(el, dir) {
+    const container = el.parentElement.querySelector('#event-cards');
+    const scrollAmount = container.offsetWidth * 0.8;
+    container.scrollBy({ left: dir === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+  }
+</script>
+
+    
+       
+
+    <div class=" grid items-center justify p-3 sm:p-5 lg:p-10 bg-[#f5f5f5]  bg-center ">
+
+      <div class="mx-2 sm:mx-12 lg:mx-20 mt-5 sm:mt-6 lg:mt-10 flex align-middle">
+        <div>
+          <div
+            class="text-[#2167A7] text-xl sm:text-2xl lg:text-[1.75rem] font-bold lg:mx-4 mb-4 lg:mb-8 w-44 sm:w-52 lg:w-64">
+            LATEST UPDATES
+          </div>
+        </div>
+        <div class="w-full mt-3 lg:mt-5">
+          <hr
+            class="border-[0.2rem] lg:border-[0.22rem]  border-[#277BC7] border-solid border-t-0 border-x-0 lg:border-t-0 lg:border-x-0 rounded mb-6">
+        </div>
+      </div>
+
+            <h2
+        class="text-lg sm:text-xl lg:text-[1.6rem] font-bold mt-3 md:mt-5 lg:mt-14 mb-4 sm:mb-5 lg:mb-8 mx-2 sm:mx-12 lg:mx-24 align-left">
+        Congratulations to Our Distinguished Alumni on Their Remarkable Achievements</h2>
+
+
+      <div class="relative mx-2 sm:mx-12 lg:mx-24  mb-3 lg:mb-4">
+        <div class="w-[10vw] sm:w-[25vw] lg:w-[20vw] text-[#2167A7] text-xs sm:text-sm lg:text-[1.1rem]">
+          <!-- <div class="my-1 sm:my-2">
+                <h1 class="font-semibold">16th December, 2023</h1>
+              </div>
+     
+              <div class="flex my-1 sm:my-2">
+                <i class="fa-solid fa-clock mr-3 my-1"></i>
+                <h1 class="">8:30 AM</h1>
+              </div> -->
+
+          <!-- <div class="flex my-1 sm:my-2">
+                <i class="fa-solid fa-location-dot mr-3 my-1"></i>
+                <h1 class="">NIT Jalandhar</h1>
+              </div> -->
+
+
+        </div>
+        <div class="relative">
+
+          <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify">
+            We are proud to congratulate the following alumni of NIT Jalandhar for their outstanding success in the UPSC Civil Services Examination 2022, and for attaining prestigious positions in the ranks of  IAS, IPS, and IRS:</p>
+                         
+          </p>
+          <p><a
+              href="https://www.nitj.ac.in/template/index.html?id=689d8ebc5a0fdee1a2e72017?category=latestEvent">Read More &rarr;</a></p>
+        </div>
+        
+        <!-- <img class = "modal-image" src
+="https://nitj.ac.in/files/1713955875705-unnamed.jpg" alt="image" class="max-w-lg rounded-lg mt-10 w-full"> -->
+        
+        <img src="https://nitj.ac.in/files/1755156146906-UPSC2022.jpeg" alt="image" class="modal-image mx-auto max-w-xl rounded-xl mt-10 w-full">
+      </div>
+
+      <h2
+        class="text-lg sm:text-xl lg:text-[1.6rem] font-bold mt-3 md:mt-5 lg:mt-14 mb-4 sm:mb-5 lg:mb-8 mx-2 sm:mx-12 lg:mx-24 align-left">
+        Mr. Amit Kumar Dixit, NITJ Alumnus has achieved the remarkable feat of securing the 627th rank in the UPSC CSE 2024</h2>
+
+
+      <div class="relative mx-2 sm:mx-12 lg:mx-24  mb-3 lg:mb-4">
+        <div class="w-[10vw] sm:w-[25vw] lg:w-[20vw] text-[#2167A7] text-xs sm:text-sm lg:text-[1.1rem]">
+          <!-- <div class="my-1 sm:my-2">
+                <h1 class="font-semibold">16th December, 2023</h1>
+              </div>
+     
+              <div class="flex my-1 sm:my-2">
+                <i class="fa-solid fa-clock mr-3 my-1"></i>
+                <h1 class="">8:30 AM</h1>
+              </div> -->
+
+          <!-- <div class="flex my-1 sm:my-2">
+                <i class="fa-solid fa-location-dot mr-3 my-1"></i>
+                <h1 class="">NIT Jalandhar</h1>
+              </div> -->
+
+
+        </div>
+        <div class="relative">
+
+          <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify">
+            We are delighted to celebrate the outstanding achievement of Mr. Amit Kumar Dixit, an alumnus of Dr B R Ambedkar National Institute of Technology, Jalandhar, who has secured All India Rank 627 in the UPSC Civil Services Examination 2024.&nbsp;</p>
+              
+              <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify"><br />
+                Hailing from Raebareli, Uttar Pradesh, Amit graduated with a B.Tech in Civil Engineering (Batch of 2014–2018). His journey to success was greatly supported by the unwavering encouragement of his mother, a homemaker, and the dedicated mentorship of his professors at NIT Jalandhar.</p>
+                
+              
+              <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify"><br />
+                Amit’s passion for education was evident early on, as he began coaching JEE aspirants during his college years. Amid the challenges of the COVID-19 pandemic, he embarked on his UPSC journey while simultaneously managing a professional job. This was his third attempt, with Physics as his optional subject—a testament to his perseverance, especially after not clearing the prelims in his first two attempts.</p>
+                
+              <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify"><br />
+                Beyond academics, Amit was an active participant in campus life. He displayed his creativity and leadership by joining the Baware theatre club and contributing to the event management of technical festivals like TechNiti, fostering his holistic growth.</p>
+              
+              <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify"><br />
+                On behalf of the institute, Prof. B.K. Kanaujia, Director, NIT Jalandhar, extended his heartfelt congratulations to Amit on this remarkable milestone.</p>
+                
+              <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify"><br />
+                We are proud of Amit's accomplishment and wish him continued success and impact in his journey as a civil servant.</p>
+        
+          <!-- <p><a
+              href="https://www.nitj.ac.in/template/index.html?id=668fa4f704e16af681ed2c30?category=newpage">Read
+              More &rarr;</a></p> -->
+        </div>
+        
+        <!-- <img class = "modal-image" src ="https://nitj.ac.in/files/1713955875705-unnamed.jpg" alt="image" class="max-w-lg rounded-lg mt-10 w-full"> -->
+        
+        <img src ="https://nitj.ac.in/files/1745927331562-Amit_Dixit_AIR_627.jpg" alt="image" class="modal-image mx-auto max-w-xl rounded-xl mt-10 w-full">
+      </div>
+
+      <h2
+        class="text-lg sm:text-xl lg:text-[1.6rem] font-bold mt-3 md:mt-5 lg:mt-14 mb-4 sm:mb-5 lg:mb-8 mx-2 sm:mx-12 lg:mx-24 align-left">
+        Ms. Sadaf Malik, NITJ Alumnus has achieved the remarkable feat of securing the 742nd rank in the UPSC CSE 2024</h2>
+
+
+      <div class="relative mx-2 sm:mx-12 lg:mx-24  mb-3 lg:mb-4">
+        <div class="w-[10vw] sm:w-[25vw] lg:w-[20vw] text-[#2167A7] text-xs sm:text-sm lg:text-[1.1rem]">
+          <!-- <div class="my-1 sm:my-2">
+                <h1 class="font-semibold">16th December, 2023</h1>
+              </div>
+     
+              <div class="flex my-1 sm:my-2">
+                <i class="fa-solid fa-clock mr-3 my-1"></i>
+                <h1 class="">8:30 AM</h1>
+              </div> -->
+
+          <!-- <div class="flex my-1 sm:my-2">
+                <i class="fa-solid fa-location-dot mr-3 my-1"></i>
+                <h1 class="">NIT Jalandhar</h1>
+              </div> -->
+
+
+        </div>
+        <div class="relative">
+
+          <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify">
+            Sadaf Malik, a distinguished engineer from NIT Jalandhar, has captured national attention by excelling in the UPSC CSE 2024. Originating from Kapurthala, Punjab, her journey stands as a powerful example of determination and perseverance.&nbsp;</p>
+              
+              <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify"><br />
+                Showing academic brilliance from the beginning, Sadaf pursued her B.Tech in Chemical Engineering at NIT Jalandhar (2016–2020 Batch). She began her professional career as a Data Analyst at ICICI Bank, Gurugram. However, driven by a deep aspiration to serve the nation, she courageously resigned from her job and devoted herself entirely to the demanding preparation for the UPSC examinations.</p>
+                
+              
+              <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify"><br />
+                Her unwavering dedication paid off when she secured an impressive 742nd rank in the UPSC CSE 2024. With a strong focus on self-study and persistent effort, Sadaf’s determined pursuit of her dream has led her to the esteemed Lal Bahadur Shastri National Academy of Administration (LBSNAA) in Mussoorie for her training.</p>
+                
+              <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify"><br />
+                Sadaf Malik’s inspiring journey of resilience and success continues to be a source of motivation for countless UPSC aspirants across the country.</p>
+              
+              <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify"><br />
+                Prof. Binod Kumar Kanaujia, Director of NIT Jalandhar, congratulations to Sadaf Malik on her outstanding accomplishment, noting that her success will inspire many other students to strive for excellence.</p>  
+        
+          <!-- <p><a
+              href="https://www.nitj.ac.in/template/index.html?id=668fa4f704e16af681ed2c30?category=newpage">Read
+              More &rarr;</a></p> -->
+        </div>
+        
+        <!-- <img class = "modal-image" src ="https://nitj.ac.in/files/1713955875705-unnamed.jpg" alt="image" class="max-w-lg rounded-lg mt-10 w-full"> -->
+        
+        <img src ="https://nitj.ac.in/files/1745841834346-image_1.png" alt="image" class="modal-image mx-auto max-w-xl rounded-xl mt-10 w-full">
+      </div>
+
+      <h2
+        class="text-lg sm:text-xl lg:text-[1.6rem] font-bold mt-3 md:mt-5 lg:mt-14 mb-4 sm:mb-5 lg:mb-8 mx-2 sm:mx-12 lg:mx-24 align-left">
+        NIT Jalandhar and KISCO India Private Limited Sign MoU to Support Economically Disadvantaged Students</h2>
+
+
+      <div class="relative mx-2 sm:mx-12 lg:mx-24  mb-3 lg:mb-4">
+        <div class="w-[10vw] sm:w-[25vw] lg:w-[20vw] text-[#2167A7] text-xs sm:text-sm lg:text-[1.1rem]">
+          <!-- <div class="my-1 sm:my-2">
+                <h1 class="font-semibold">16th December, 2023</h1>
+              </div>
+     
+              <div class="flex my-1 sm:my-2">
+                <i class="fa-solid fa-clock mr-3 my-1"></i>
+                <h1 class="">8:30 AM</h1>
+              </div> -->
+
+          <!-- <div class="flex my-1 sm:my-2">
+                <i class="fa-solid fa-location-dot mr-3 my-1"></i>
+                <h1 class="">NIT Jalandhar</h1>
+              </div> -->
+
+
+        </div>
+        <div class="relative">
+
+          <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify">
+            In a commendable step towards fostering academic talent and supporting students from economically disadvantaged backgrounds, Dr. B.R. Ambedkar National Institute of Technology, Jalandhar (NIT Jalandhar) has signed a Memorandum of Understanding (MoU) with KISCO India Private Limited (KIPL) on Nov 13, 2024. The MoU was formally signed by Prof. Binod Kumar Kanaujia, Director of NIT Jalandhar, and Mr. Rohit Khanna, Managing Director of KIPL, who is also an esteemed alumnus of NIT Jalandhar from the class of 1994.</p>
+                         
+          </p>
+          <p><a
+              href="https://nitj.ac.in/template/index.html?id=6735891c52f13f4cf336d146?category=researchHighlights">Read
+              More &rarr;</a></p>
+        </div>
+        
+        <!-- <img class = "modal-image" src
+="https://nitj.ac.in/files/1713955875705-unnamed.jpg" alt="image" class="max-w-lg rounded-lg mt-10 w-full"> -->
+        
+        <img src="https://nitj.ac.in/files/1731561921814-KISTO-2%202024.jpeg" alt="image" class="modal-image mx-auto max-w-xl rounded-xl mt-10 w-full">
+      </div>
+
+      <h2
+        class="text-lg sm:text-xl lg:text-[1.6rem] font-bold mt-3 md:mt-5 lg:mt-14 mb-4 sm:mb-5 lg:mb-8 mx-2 sm:mx-12 lg:mx-24 align-left">
+        Manpreet Sharma, NITJ Alumnus achieves All India Rank 83 in UPSC</h2>
+
+
+      <div class="relative mx-2 sm:mx-12 lg:mx-24  mb-3 lg:mb-4">
+        <div class="w-[10vw] sm:w-[25vw] lg:w-[20vw] text-[#2167A7] text-xs sm:text-sm lg:text-[1.1rem]">
+          <!-- <div class="my-1 sm:my-2">
+                <h1 class="font-semibold">16th December, 2023</h1>
+              </div>
+     
+              <div class="flex my-1 sm:my-2">
+                <i class="fa-solid fa-clock mr-3 my-1"></i>
+                <h1 class="">8:30 AM</h1>
+              </div> -->
+
+          <!-- <div class="flex my-1 sm:my-2">
+                <i class="fa-solid fa-location-dot mr-3 my-1"></i>
+                <h1 class="">NIT Jalandhar</h1>
+              </div> -->
+
+
+        </div>
+        <div class="relative">
+
+          <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify">
+            Manpreet Sharma, an alumnus of NIT Jalandhar&rsquo;s 2016 Mechanical Engineering batch, has demonstrated Exceptional Academic and Professional Achievements. Hailing from the village of Lopon in the Moga District of Punjab, he comes from a family deeply dedicated to Public Service. His Mother is an Economics Lecturer at the Government Higher Secondary School in Moga, and his Father has dedicated nearly three decades to the field of Technical Education. His sister, Dr. Suman Sharma, is currently pursuing Postdoctoral Research in Horticulture at the University of Florence, USA, after completing her PhD at New Mexico State University, USA.<br />
+              &nbsp;</p>
+              
+              <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify">During his time at NIT Jalandhar, Manpreet ranked as the 4th topper of his batch. He displayed remarkable passion in his final-year project on the topic &ldquo;Design and Fabrication of a Solar Thermal Storage Device using Phase Change Material,&rdquo; under the guidance of Dr. Subash Chander. He also gained valuable Industry exposure through his summer internship at Tata Steel, Jamshedpur.</p>
+              
+              <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify"><br />
+              Manpreet began his professional career as an Assistant Manager at Maruti Suzuki India, where he served for three years. Driven by his aspiration to contribute to public administration, he later resigned to prepare for the Civil Services Examination. During this period, he actively engaged in social work through initiatives like &lsquo;Mera Pind 360&rsquo; and founded &lsquo;Mera Farmhouse,&rsquo; an agritech startup aimed at promoting rural development.</p>
+              
+              <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify"><br />
+              His perseverance paid off when he successfully cleared the UPSC Civil Services Examination, achieving an All India Rank of 83 in the reserve list of 2023, which was released on 25th October 2024.</p>
+              
+              <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify"><br />
+              Prof. Binod Kumar Kanaujia, Director of NIT Jalandhar, extends his Heartfelt Congratulations to Manpreet Sharma for his Outstanding Achievements and conveys his best wishes for Manpreet&#39;s Future Endeavors. His success is a source of great pride for the Institute, and we look forward to seeing his continued excellence in his journey of Service and Leadership.</p>  
+          
+          </p>
+          <!-- <p><a
+              href="https://www.nitj.ac.in/template/index.html?id=668fa4f704e16af681ed2c30?category=newpage">Read
+              More &rarr;</a></p> -->
+        </div>
+        
+        <!-- <img class = "modal-image" src
+="https://nitj.ac.in/files/1713955875705-unnamed.jpg" alt="image" class="max-w-lg rounded-lg mt-10 w-full"> -->
+        
+        <img src
+="https://nitj.ac.in/files/1730095118766-1.jpg" alt="image" class="modal-image mx-auto max-w-xl rounded-xl mt-10 w-full">
+      </div>
+      
+      <h2
+        class="text-lg sm:text-xl lg:text-[1.6rem] font-bold mt-3 md:mt-5 lg:mt-14 mb-4 sm:mb-5 lg:mb-8 mx-2 sm:mx-12 lg:mx-24 align-left">
+        Celebrating Our Alumnus: Prince Kumar Singh 's Remarkable Achievement</h2>
+
+
+      <div class="relative mx-2 sm:mx-12 lg:mx-24  mb-3 lg:mb-4">
+        <div class="w-[10vw] sm:w-[25vw] lg:w-[20vw] text-[#2167A7] text-xs sm:text-sm lg:text-[1.1rem]">
+          <!-- <div class="my-1 sm:my-2">
+                <h1 class="font-semibold">16th December, 2023</h1>
+              </div>
+     
+              <div class="flex my-1 sm:my-2">
+                <i class="fa-solid fa-clock mr-3 my-1"></i>
+                <h1 class="">8:30 AM</h1>
+              </div> -->
+
+          <!-- <div class="flex my-1 sm:my-2">
+                <i class="fa-solid fa-location-dot mr-3 my-1"></i>
+                <h1 class="">NIT Jalandhar</h1>
+              </div> -->
+
+
+        </div>
+        <div class="relative">
+
+          <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify">We are thrilled to share the exciting news that our esteemed alumnus, Mr. Prince Kumar Singh Batch of 2016-2020), has achieved an extraordinary milestone AIR15 by qualifying for the prestigious UPSC Indian Forest Service (IFS) exam.
+
+            The UPSC IFS exam is known for its rigorous selection process and is one of the most challenging examinations in India. Mr.Prince's success in this exam is a testament to his dedication, hard work, and exceptional intellect. This accomplishment is not only a personal triumph but also a moment of immense pride for all of us at  Dr. B. R. Ambedkar National Institute of Technology Jalandhar  .
+            
+            Mr Prince Kumar Singh has always been a beacon of excellence, demonstrating an unwavering commitment to academic and professional pursuits. This latest achievement further cements his/her status as a role model for our current students and fellow alumni. </strong></p>
+          <p><a
+              href="https://www.nitj.ac.in/template/index.html?id=668fa4f704e16af681ed2c30?category=newpage">Read
+              More &rarr;</a></p>
+        </div>
+        
+        <!-- <img class = "modal-image" src
+="https://nitj.ac.in/files/1713955875705-unnamed.jpg" alt="image" class="max-w-lg rounded-lg mt-10 w-full"> -->
+        
+        <img src
+="https://nitj.ac.in/files/1720688904620-image_.png" alt="image" class="modal-image mx-auto max-w-xl rounded-xl mt-10 w-full">
+      </div>
+      
+      
+      <h2
+        class="text-lg sm:text-xl lg:text-[1.6rem] font-bold mt-3 md:mt-5 lg:mt-14 mb-4 sm:mb-5 lg:mb-8 mx-2 sm:mx-12 lg:mx-24 align-left">
+        An Alumnus's words for her Achievements and Alma Mater NIT Jalandhar</h2>
+
+
+      <div class="relative mx-2 sm:mx-12 lg:mx-24  mb-3 lg:mb-4">
+        <div class="w-[10vw] sm:w-[25vw] lg:w-[20vw] text-[#2167A7] text-xs sm:text-sm lg:text-[1.1rem]">
+          <!-- <div class="my-1 sm:my-2">
+                <h1 class="font-semibold">16th December, 2023</h1>
+              </div>
+     
+              <div class="flex my-1 sm:my-2">
+                <i class="fa-solid fa-clock mr-3 my-1"></i>
+                <h1 class="">8:30 AM</h1>
+              </div> -->
+
+          <!-- <div class="flex my-1 sm:my-2">
+                <i class="fa-solid fa-location-dot mr-3 my-1"></i>
+                <h1 class="">NIT Jalandhar</h1>
+              </div> -->
+
+
+        </div>
+        <div class="relative">
+
+          <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify">Ms. Sadaf Choudhary, NITJ Alumnus (B.Tech Chemical Engineering Batch: 2012-2016) has secured AIR 23 in UPSC Civil Services Examination 2020. </strong></p>
+          <!-- <p><a
+              href="https://nitj.ac.in/template/index.html?id=65802d57a9bc398b52134c6e?category=latestEvent">Read
+              More &rarr;</a></p> -->
+        </div>
+        
+        <img  src="https://nitj.ac.in/files/1713955875705-unnamed.jpg" alt="image" class="modal-image mx-auto max-w-lg rounded-lg mt-10 w-full">
+        
+        <!-- <img class = "modal-image" src
+="https://nitj.ac.in/files/1713955875705-unnamed.jpg" alt="image" class="max-w-xl rounded-xl mt-10 w-full"> -->
+      </div>
+      
+      
+      
+      <h2
+        class="text-lg sm:text-xl lg:text-[1.6rem] font-bold mt-3 md:mt-5 lg:mt-14 mb-4 sm:mb-5 lg:mb-8 mx-2 sm:mx-12 lg:mx-24 align-left">
+        Our Alumnus Mr. Jagdeep Chawla (Batch 1994) contributed a Financial Aid of Rs. 3.00 lakh for the Development AI based Research in 'Sports and Healthcare Research Centre' of the Institute</h2>
+
+
+      <div class="relative mx-2 sm:mx-12 lg:mx-24  mb-3 lg:mb-4">
+        <div class="w-[10vw] sm:w-[25vw] lg:w-[20vw] text-[#2167A7] text-xs sm:text-sm lg:text-[1.1rem]">
+          <!-- <div class="my-1 sm:my-2">
+                <h1 class="font-semibold">16th December, 2023</h1>
+              </div>
+     
+              <div class="flex my-1 sm:my-2">
+                <i class="fa-solid fa-clock mr-3 my-1"></i>
+                <h1 class="">8:30 AM</h1>
+              </div> -->
+
+          <!-- <div class="flex my-1 sm:my-2">
+                <i class="fa-solid fa-location-dot mr-3 my-1"></i>
+                <h1 class="">NIT Jalandhar</h1>
+              </div> -->
+
+
+        </div>
+        <div class="relative">
+
+          <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify">Mr. Jagdeep Chawla, Director of eNest Technologies in Mohali and an alumnus of the 1994 graduating batch of the Institute, along with his team members, visited the Institute. During the visit, Prof. Binod Kumar Kanaujia, Director of NIT Jalandhar, and Mr. Jagdeep Chawla engaged in discussions to promote the use of artificial intelligence in the healthcare sector. Mr Jagdeep Chawla has just completed M S in Data Science from Northwestern University (USA). Both NITJ and eNest Technologies agreed to collaborate and share expertise and technology. Additionally, eNest Technologies committed to providing industry-related projects in the field of AI to faculty and students of the Institute specially in the field of Textile Technology. As a gesture of support, Mr. Jagdeep Chawla also contributed a financial aid of Rs 3.00 lakh for the development AI based research in ‘sports and healthcare research centre’ of the Institute. </strong></p>
+          <!-- <p><a
+              href="https://nitj.ac.in/template/index.html?id=65802d57a9bc398b52134c6e?category=latestEvent">Read
+              More &rarr;</a></p> -->
+        </div>
+        <img src
+="https://nitj.ac.in/files/1712981468612-unnamed.png" alt="image" class="modal-image mx-auto max-w-4xl rounded-xl mt-10 w-full">
+      </div>
+     
+      <h2
+        class="text-lg sm:text-xl lg:text-[1.6rem] font-bold mt-3 md:mt-5 lg:mt-8 mb-4 sm:mb-5 lg:mb-6 mx-2 sm:mx-12 lg:mx-24 align-left">
+        ‘Yes, We Can’ — This Indian Aerospace Startup Is On A Mission to Build India's Own Jet Engine by our ALUMNUS</h2>
+
+
+      <div class="relative  mx-2 sm:mx-12 lg:mx-24  mb-8 lg:mb-10 ">
+        <div class="w-[10vw] sm:w-[25vw] lg:w-[20vw] text-[#2167A7] text-xs sm:text-sm lg:text-[1.1rem]">
+
+        </div>
+        <div class="relative">
+
+            <a
+              href="https://swarajyamag.com/defence/yes-we-can-this-indian-aerospace-startup-is-on-a-mission-to-build-indias-own-jet-engine">Click here to Read
+              More &rarr;</a></p>
+        </div>
+        <img  src="https://nitj.ac.in/files/1710129666331-Prateek_Dhawan_with_engine_in_2015.png" alt="" class="modal-image mx-auto max-w-xl rounded-xl mt-10 w-full">
+        
+
+      </div>
+
+      <h2
+        class="text-lg sm:text-xl lg:text-[1.6rem] font-bold mt-3 md:mt-5 lg:mt-8 mb-4 sm:mb-5 lg:mb-6 mx-2 sm:mx-12 lg:mx-24 align-left">
+        NITJ Alumni Mr Preminder Singh (Batch of 1994: ECE) Director, Product Engineering @APPLE, US</h2>
+
+
+      <div class="relative mx-2 sm:mx-12 lg:mx-24  mb-8 lg:mb-10">
+        <div class="w-[10vw] sm:w-[25vw] lg:w-[20vw] text-[#2167A7] text-xs sm:text-sm lg:text-[1.1rem]">
+
+        </div>
+        <div class="relative">
+          <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify">Preminder is a seasoned Product Engineering Director with extensive experience in the semiconductor industry, specializing in the development and shipping of Apple System-on-Chips (SoCs). With over 20+ years of experience, he has a proven track record of leading cross-functional teams to deliver cutting-edge technology on time and within budget.
+
+            His expertise encompasses product development, design validation, and manufacturing processes, ensuring high-quality standards and performance benchmarks are met. Preminder has a strong background in collaborative problem-solving, driving innovation, and optimizing workflows to enhance productivity.
+            
+            Passionate about technology and engineering excellence, he is committed to fostering a culture of continuous improvement and mentorship within his teams.</strong></p>
+          <!-- <p>
+            <a
+              href="https://swarajyamag.com/defence/yes-we-can-this-indian-aerospace-startup-is-on-a-mission-to-build-indias-own-jet-engine">Click here for Read
+              More &rarr;</a></p> -->
+        </div>
+        <img src="https://nitj.ac.in/files/1727496858488-WhatsApp%20Image%202024-09-27%20at%205.09.53%20PM.jpeg" alt="" class="mx-auto max-w-sm rounded-sm mt-10 w-full">
+        
+
+      </div>
+      
+      
+      <h2
+        class="text-lg sm:text-xl lg:text-[1.6rem] font-bold mt-3 md:mt-5 lg:mt-8 mb-4 sm:mb-5 lg:mb-6 mx-2 sm:mx-12 lg:mx-24 align-left">
+        NITJ Alumni of ECE Department Donated Funds for Upgradation of "Devices and Circuits Lab"</h2>
+
+
+      <div class="relative mx-2 sm:mx-12 lg:mx-24  mb-8 lg:mb-10">
+        <div class="w-[10vw] sm:w-[25vw] lg:w-[20vw] text-[#2167A7] text-xs sm:text-sm lg:text-[1.1rem]">
+
+        </div>
+        <div class="relative">
+
+            <a
+              href="https://nitj.ac.in/files/1702701058013-NITJ Alumni of ECE Department Donated Funds for Upgradation.pdf">Click here to Read
+              More &rarr;</a></p>
+        </div>
+        
+
+      </div>
+
+      <h2
+        class="text-lg sm:text-xl lg:text-[1.6rem] font-bold mt-3 md:mt-5 lg:mt-8 mb-4 sm:mb-5 lg:mb-6 mx-2 sm:mx-12 lg:mx-24 align-left">
+        NITJ Alumni Mr. Sudhir Chikhle (B.Tech-Mechanical Engineering) joins Tata Motors' EV Business as Chief Purchase Officer</h2>
+
+
+      <div class="relative mx-2 sm:mx-12 lg:mx-24  mb-8 lg:mb-10">
+        <div class="w-[10vw] sm:w-[25vw] lg:w-[20vw] text-[#2167A7] text-xs sm:text-sm lg:text-[1.1rem]">
+
+        </div>
+        <div class="relative">
+
+            <a
+              href="https://www.autocarpro.in/news/sourcing-specialist-sudhir-chikhle-joins-tata-motors-ev-business-as-chief-purchase-officer-118115">Click here to Read
+              More &rarr;</a></p>
+        </div>
+        
+
+      </div>
+      
+      <h2
+        class="text-lg sm:text-xl lg:text-[1.6rem] font-bold mt-3 md:mt-5 lg:mt-8 mb-4 sm:mb-5 lg:mb-6 mx-2 sm:mx-12 lg:mx-24 align-left">
+        An MoU signed between NIT Jalandhar and KISCO India Private Limited (KIPL) </h2>
+
+
+      <div class="relative mx-2 sm:mx-12 lg:mx-24  mb-8 lg:mb-10">
+        <div class="w-[10vw] sm:w-[25vw] lg:w-[20vw] text-[#2167A7] text-xs sm:text-sm lg:text-[1.1rem]">
+          <!-- <div class="my-1 sm:my-2">
+                <h1 class="font-semibold">16th December, 2023</h1>
+              </div>
+     
+              <div class="flex my-1 sm:my-2">
+                <i class="fa-solid fa-clock mr-3 my-1"></i>
+                <h1 class="">8:30 AM</h1>
+              </div> -->
+
+          <!-- <div class="flex my-1 sm:my-2">
+                <i class="fa-solid fa-location-dot mr-3 my-1"></i>
+                <h1 class="">NIT Jalandhar</h1>
+              </div> -->
+
+
+        </div>
+        <div class="relative">
+
+          <p class="text-xs sm:text-sm sm:leading-6 lg:text-[1.1rem]  sm:my-2 text-justify">The MoU was signed by Prof. Binod
+            Kumar Kanaujia, Director of NIT Jalandhar, and Mr. Rohit Khanna, Managing Director of KIPL. The main
+            objective of this collaboration is to extend vital financial support to academically gifted yet economically
+            challenged students at NIT Jalandhar. KIPL has generously provided financial assistance amounting to Rs 3.2
+            lacs to these deserving students as part of their Corporate Social Responsibility (CSR) Initiative. This
+            marks the 5th consecutive year of their support, and the institute appreciates the dedication of KIPL to
+            nurture the future leaders. <strong>It's worth mentioning that Mr. Rohit Khanna is an alumnus of NIT
+              Jalandhar, having graduated from the institution in the class of 1994.</strong></p>
+          <p><a
+              href="https://nitj.ac.in/template/index.html?id=654868447740daae16b57a0f?category=researchHighlights">Read
+              More &rarr;</a></p>
+        </div>
+        <img src
+="https://v1.nitj.ac.in/nitj_files/links/03_50486.jpg" alt="mou_image" class="modal-image mx-auto max-w-4xl rounded-xl mt-10 w-full">
+        
+
+      </div>
+      
+    </div>
+
+
+    <!--LATEST UPDATES ENDS-->
+
+
+
+
+
+
+    <div id="default-carousel" class="relative w-full" data-carousel="slide">
+      <!-- Carousel wrapper -->
+      <div class="relative h-[45vh] sm:h-[50vh] overflow-hidden rounded-lg lg:h-[90vh]">
+
+        <!-- Item 1 -->
+        <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+
+
+
+          <!--Notable Alumni starts-->
+          <div class="grid items-center w-full h-[45vh] sm:h-[50vh] lg:h-[90vh] p-1 lg:p-5 bg-[#2167A7]">
+            <div class="w-full lg:w-[15vw] flex justify-center sm:mx-9 lg:mx-14 my-3 lg:mt-2">
+              <h1 class="text-base sm:text-xl lg:text-3xl text-white font-bold">NOTABLE ALUMNI</h1>
+            </div>
+
+            <div class="ml-4 mr-2 sm:mx-12 sm:mb-10 flex justify-center my-3 sm:my-5">
+              <div class="max-w-[50vw] sm:max-w-[48vw] lg:max-w-[46vw] flex justify-center">
+                <img class="max-h-[23vh] sm:max-h-[30vh] lg:max-h-[60vh] rounded " src="https://nitj.ac.in/files/1710129666331-Prateek_Dhawan_with_engine_in_2015.png"
+                  alt="alumni image">
+              </div>
+
+              <div class="grid items-center w-[50vw] sm:w-[44vw] mx-3 sm:mx-5">
+                <h1 class="text-white text-sm sm:text-xl lg:text-3xl text-center font-bold lg:leading-relaxed">Mr Prateek Dhawan</h1>
+
+                <h1 class="text-white text-[0.5rem] sm:text-xs lg:text-base text-center uppercase lg:tracking-wider"> </h1>
+
+                <h2
+                  class="text-white text-[0.4rem] sm:text-xs lg:text-sm text-center my-2 sm:my-3 lg:my-6 lg:tracking-wider">
+                  BTech (Mechanical Engineering) | 2010-2014</h2>
+
+                <div class="flex justify-center mt-3 sm:mt-5 lg:mt-7 text-center">
+                  <div class="text-white hover:text-[#82C3FF] mx-1 sm:mx-2 lg:mx-4">
+                    <a href="https://www.instagram.com/" target="_blank">
+                      <i class="fa-brands fa-instagram text-xs sm:text-base lg:text-2xl"></i>
+                    </a>
+                  </div>
+                  <div class="text-white hover:text-[#82C3FF] mx-1 sm:mx-2 lg:mx-4">
+                    <a href="https://twitter.com/" target="_blank">
+                      <i class="socialIcons fab fa-twitter text-xs sm:text-base lg:text-2xl "></i>
+                    </a>
+                  </div>
+                  <div class="text-white hover:text-[#82C3FF] mx-1 sm:mx-2 lg:mx-4">
+                    <a href="https://www.linkedin.com/" target="_blank">
+                      <i class=" socialIcons fa-brands fa-linkedin text-xs sm:text-base lg:text-2xl "></i>
+                    </a>
+                  </div>
+                </div>
+
+
+                <div class=" my-2 lg:my-6 mx-1 sm:mx-4 text-center p-1 sm:p-3">
+                  <p class="text-white text-center text-[0.5rem] sm:text-xs lg:text-base">Master’s Degree in Mechanical Engineering at Michigan Technological University</p>
+                </div>
+
+                <div class="text-center">
+                  <button
+                    class="text-white text-[0.5rem] sm:text-xs lg:text-lg my-3 bg-[#329DFF99] py-1 px-4 sm:px-7 lg:px-14 rounded-lg border lg:border-2 border-white hover:-translate-y-1 hover:scale-110"
+                    type="button" button onclick="window.open('https://nitjalandhar.almaconnect.com/alumni')">Find
+                    Alumni</button>
+                </div>
+
+              </div>
+            </div>
+
+            <div>
+
+            </div>
+          </div>
+
+          <!--Notable Alumni Ends-->
+
+
+        </div>
+        <!-- Item 1 Ends -->
+
+
+
+        <!-- Item 1 -->
+        <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+
+
+
+          <!--Notable Alumni starts-->
+          <div class="grid items-center w-full h-[45vh] sm:h-[50vh] lg:h-[90vh] p-1 lg:p-5 bg-[#2167A7]">
+            <div class="w-full lg:w-[15vw] flex justify-center sm:mx-9 lg:mx-14 my-3 lg:mt-2">
+              <h1 class="text-base sm:text-xl lg:text-3xl text-white font-bold">NOTABLE ALUMNI</h1>
+            </div>
+
+            <div class="ml-4 mr-2 sm:mx-12 sm:mb-10 flex justify-center my-3 sm:my-5">
+              <div class="max-w-[50vw] sm:max-w-[48vw] lg:max-w-[46vw] flex justify-center">
+                <img class="max-h-[23vh] sm:max-h-[30vh] lg:max-h-[60vh] rounded " src="img/alumni_img/upsanataku.png"
+                  alt="alumni image">
+              </div>
+
+              <div class="grid items-center w-[50vw] sm:w-[44vw] mx-3 sm:mx-5">
+                <h1 class="text-white text-sm sm:text-xl lg:text-3xl text-center font-bold lg:leading-relaxed">Upasna
+                  Taku</h1>
+
+                <h1 class="text-white text-[0.5rem] sm:text-xs lg:text-base text-center uppercase lg:tracking-wider">Co
+                  founder, mobikwik</h1>
+
+                <h2
+                  class="text-white text-[0.4rem] sm:text-xs lg:text-sm text-center my-2 sm:my-3 lg:my-6 lg:tracking-wider">
+                  BTech (ICE) | 2004-2008</h2>
+
+                <div class="flex justify-center mt-3 sm:mt-5 lg:mt-7 text-center">
+                  <div class="text-white hover:text-[#82C3FF] mx-1 sm:mx-2 lg:mx-4">
+                    <a href="https://www.instagram.com/upasanataku/" target="_blank">
+                      <i class="fa-brands fa-instagram text-xs sm:text-base lg:text-2xl"></i>
+                    </a>
+                  </div>
+                  <div class="text-white hover:text-[#82C3FF] mx-1 sm:mx-2 lg:mx-4">
+                    <a href="https://twitter.com/UpasanaTaku" target="_blank">
+                      <i class="socialIcons fab fa-twitter text-xs sm:text-base lg:text-2xl "></i>
+                    </a>
+                  </div>
+                  <div class="text-white hover:text-[#82C3FF] mx-1 sm:mx-2 lg:mx-4">
+                    <a href="https://www.linkedin.com/in/upasana/" target="_blank">
+                      <i class=" socialIcons fa-brands fa-linkedin text-xs sm:text-base lg:text-2xl "></i>
+                    </a>
+                  </div>
+                </div>
+
+
+                <div class=" my-2 lg:my-6 mx-1 sm:mx-4 text-center p-1 sm:p-3">
+                  <p class="text-white text-center text-[0.5rem] sm:text-xs lg:text-base">MS in Management Science and
+                    Engineering from Stanford University</p>
+                </div>
+
+                <div class="text-center">
+                  <button
+                    class="text-white text-[0.5rem] sm:text-xs lg:text-lg my-3 bg-[#329DFF99] py-1 px-4 sm:px-7 lg:px-14 rounded-lg border lg:border-2 border-white hover:-translate-y-1 hover:scale-110"
+                    type="button" button onclick="window.open('https://nitjalandhar.almaconnect.com/alumni')">Find
+                    Alumni</button>
+                </div>
+
+              </div>
+            </div>
+
+            <div>
+
+            </div>
+          </div>
+
+          <!--Notable Alumni Ends-->
+
+        </div>
+        <!-- Item 1 Ends -->
+
+        <!-- Item 2 -->
+        <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+
+
+
+          <!--Notable Alumni starts-->
+          <div class="grid items-center w-full h-[45vh] sm:h-[50vh] lg:h-[90vh] p-1 lg:p-5 bg-[#2167A7]">
+            <div class="w-full lg:w-[15vw] flex justify-center sm:mx-9 lg:mx-14 my-3 lg:mt-2">
+              <h1 class="text-base sm:text-xl lg:text-3xl text-white font-bold">NOTABLE ALUMNI</h1>
+            </div>
+
+            <div class="ml-4 mr-2 sm:mx-12 sm:mb-10 flex justify-center my-3 sm:my-5">
+              <div class="max-w-[50vw] sm:max-w-[48vw] lg:max-w-[46vw] flex justify-center">
+                <img class="max-h-[23vh] sm:max-h-[30vh] lg:max-h-[60vh] rounded" src="img/alumni_img/ajitmohan.jpg"
+                  alt="alumni image">
+              </div>
+
+              <div class="w-[50vw] sm:w-[44vw] mx-3 sm:mx-5">
+                <h1 class="text-white text-sm sm:text-xl lg:text-3xl text-center font-bold lg:leading-relaxed">Ajit
+                  Mohan Karimpana</h1>
+
+                <h1 class="text-white text-[0.5rem] sm:text-xs lg:text-base text-center uppercase lg:tracking-wider">
+                  Founder, Furlenco</h1>
+
+                <h2
+                  class="text-white text-[0.4rem] sm:text-xs lg:text-sm text-center my-2 sm:my-3 lg:my-6 lg:tracking-wider">
+                  BTech (IPE) | 1996-2000</h2>
+
+                <div class="flex justify-center mt-3 sm:mt-5 lg:mt-7 text-center">
+                  <div class="text-white hover:text-[#82C3FF] mx-1 sm:mx-2 lg:mx-4">
+                    <a href="https://www.instagram.com/" target="_blank">
+                      <i class="fa-brands fa-instagram text-xs sm:text-base lg:text-2xl"></i>
+                    </a>
+                  </div>
+                  <div class="text-white hover:text-[#82C3FF] mx-1 sm:mx-2 lg:mx-4">
+                    <a href="https://twitter.com/ajithkarimpana" target="_blank">
+                      <i class="socialIcons fab fa-twitter text-xs sm:text-base lg:text-2xl "></i>
+                    </a>
+                  </div>
+                  <div class="text-white hover:text-[#82C3FF] mx-1 sm:mx-2 lg:mx-4">
+                    <a href="https://www.linkedin.com/in/ajithkarimpana/" target="_blank">
+                      <i class=" socialIcons fa-brands fa-linkedin text-xs sm:text-base lg:text-2xl "></i>
+                    </a>
+                  </div>
+                </div>
+
+
+                <div class=" my-2 lg:my-6 mx-1 sm:mx-4 text-center p-1 sm:p-3">
+                  <p class="text-white text-center text-[0.5rem] sm:text-xs lg:text-base">MS in Computer and Information
+                    Science from Temple University</p>
+                </div>
+
+                <div class="text-center">
+                  <button
+                    class="text-white text-[0.5rem] sm:text-xs lg:text-lg my-3 bg-[#329DFF99] py-1 px-4 sm:px-7 lg:px-14 rounded-lg border lg:border-2 border-white hover:-translate-y-1 hover:scale-110"
+                    type="button" onclick="window.open('https://nitjalandhar.almaconnect.com/alumni')">Find
+                    Alumni</button>
+                </div>
+
+              </div>
+            </div>
+
+            <div>
+
+            </div>
+          </div>
+
+          <!--Notable Alumni Ends-->
+
+        </div>
+        <!-- Item 2 Ends -->
+        <!-- Item 3 -->
+        <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+
+          <!--Notable Alumni starts-->
+          <div class="grid items-center w-full h-[45vh] sm:h-[50vh] lg:h-[90vh] p-1 lg:p-5 bg-[#2167A7]">
+            <div class="w-full lg:w-[15vw] flex justify-center sm:mx-9 lg:mx-14 my-3 lg:mt-2">
+              <h1 class="text-base sm:text-xl lg:text-3xl text-white font-bold">NOTABLE ALUMNI</h1>
+            </div>
+
+            <div class="ml-4 mr-2 sm:mx-12 sm:mb-10 flex justify-center my-3 sm:my-5">
+              <div class="max-w-[50vw] sm:max-w-[48vw] lg:max-w-[46vw] flex justify-center">
+                <img class="max-h-[23vh] sm:max-h-[30vh] lg:max-h-[60vh] rounded" src="img/alumni_img/anindyaghose.jpg"
+                  alt="alumni image">
+              </div>
+
+              <div class="w-[50vw] sm:w-[44vw] mx-3 sm:mx-5">
+                <h1 class="text-white text-sm sm:text-xl lg:text-3xl text-center font-bold lg:leading-relaxed">Anindya
+                  Ghose</h1>
+
+                <h1 class="text-white text-[0.5rem] sm:text-xs lg:text-base text-center uppercase lg:tracking-wider">
+                  Professor, NYU'S LEONARD N. STERN SCHOOL OF BUSINESS </h1>
+
+                <h2
+                  class="text-white text-[0.4rem] sm:text-xs lg:text-sm text-center my-2 sm:my-3 lg:my-6 lg:tracking-wider">
+                  BTech</h2>
+
+                <div class="flex justify-center mt-3 sm:mt-5 lg:mt-7 text-center">
+                  <div class="text-white hover:text-[#82C3FF] mx-1 sm:mx-2 lg:mx-4">
+                    <a href="https://www.instagram.com/anindyaghose/?hl=en" target="_blank">
+                      <i class="fa-brands fa-instagram text-xs sm:text-base lg:text-2xl"></i>
+                    </a>
+                  </div>
+                  <div class="text-white hover:text-[#82C3FF] mx-1 sm:mx-2 lg:mx-4">
+                    <a href="https://twitter.com/aghose?lang=en" target="_blank">
+                      <i class="socialIcons fab fa-twitter text-xs sm:text-base lg:text-2xl "></i>
+                    </a>
+                  </div>
+                  <div class="text-white hover:text-[#82C3FF] mx-1 sm:mx-2 lg:mx-4">
+                    <a href="https://www.linkedin.com/in/anindya-ghose/" target="_blank">
+                      <i class=" socialIcons fa-brands fa-linkedin text-xs sm:text-base lg:text-2xl "></i>
+                    </a>
+                  </div>
+                </div>
+
+
+                <div class=" my-2 lg:my-6 mx-1 sm:mx-4 text-center p-1 sm:p-3">
+                  <p class="text-white text-center text-[0.5rem] sm:text-xs lg:text-base">MBA from IIM Calcutta. Ph.D
+                    from Carnegie Mellon University - Tepper School of Business</p>
+                </div>
+
+                <div class="text-center">
+                  <button
+                    class="text-white text-[0.5rem] sm:text-xs lg:text-lg my-3 bg-[#329DFF99] py-1 px-4 sm:px-7 lg:px-14 rounded-lg border lg:border-2 border-white hover:-translate-y-1 hover:scale-110"
+                    type="button" onclick="window.open('https://nitjalandhar.almaconnect.com/alumni')">Find
+                    Alumni</button>
+                </div>
+
+              </div>
+            </div>
+
+            <div>
+
+            </div>
+          </div>
+
+          <!--Notable Alumni Ends-->
+
+        </div>
+        <!-- Item 3 Ends -->
+        <!-- Item 4 -->
+        <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+
+          <!--Notable Alumni starts-->
+          <div class="grid items-center w-full h-[45vh] sm:h-[50vh] lg:h-[90vh] p-1 lg:p-5 bg-[#2167A7]">
+            <div class="w-full lg:w-[15vw] flex justify-center sm:mx-9 lg:mx-14 my-3 lg:mt-2">
+              <h1 class="text-base sm:text-xl lg:text-3xl text-white font-bold">NOTABLE ALUMNI</h1>
+            </div>
+
+            <div class="ml-4 mr-2 sm:mx-12 sm:mb-10 flex justify-center my-3 sm:my-5">
+              <div class="max-w-[50vw] sm:max-w-[48vw] lg:max-w-[46vw] flex justify-center">
+                <img class="max-h-[23vh] sm:max-h-[30vh] lg:max-h-[60vh] rounded" src="img/alumni_img/amitboni.jpg"
+                  alt="alumni image">
+              </div>
+
+              <div class="w-[50vw] sm:w-[44vw] mx-3 sm:mx-5">
+                <h1 class="text-white text-sm sm:text-xl lg:text-3xl text-center font-bold lg:leading-relaxed">Amit Boni
+                </h1>
+
+                <h1 class="text-white text-[0.5rem] sm:text-xs lg:text-base text-center uppercase lg:tracking-wider">
+                  FOUNDER & CEO, ENSUREDIT</h1>
+
+                <h2
+                  class="text-white text-[0.4rem] sm:text-xs lg:text-sm text-center my-2 sm:my-3 lg:my-6 lg:tracking-wider">
+                  BTech (IPE) | 1996-2000</h2>
+
+                <div class="flex justify-center mt-3 sm:mt-5 lg:mt-7 text-center">
+                  <div class="text-white hover:text-[#82C3FF] mx-1 sm:mx-2 lg:mx-4">
+                    <a href="https://www.instagram.com/" target="_blank">
+                      <i class="fa-brands fa-instagram text-xs sm:text-base lg:text-2xl"></i>
+                    </a>
+                  </div>
+                  <div class="text-white hover:text-[#82C3FF] mx-1 sm:mx-2 lg:mx-4">
+                    <a href="https://twitter.com/" target="_blank">
+                      <i class="socialIcons fab fa-twitter text-xs sm:text-base lg:text-2xl "></i>
+                    </a>
+                  </div>
+                  <div class="text-white hover:text-[#82C3FF] mx-1 sm:mx-2 lg:mx-4">
+                    <a href="https://www.linkedin.com/in/amitboni/?originalSubdomain=in" target="_blank">
+                      <i class=" socialIcons fa-brands fa-linkedin text-xs sm:text-base lg:text-2xl "></i>
+                    </a>
+                  </div>
+                </div>
+
+
+                <div class=" my-2 lg:my-6 mx-1 sm:mx-4 text-center p-1 sm:p-3">
+                  <p class="text-white text-center text-[0.5rem] sm:text-xs lg:text-base">MBA in marketing from
+                    Management Development Institute, Gurgaon</p>
+                </div>
+
+                <div class="text-center">
+                  <button
+                    class="text-white text-[0.5rem] sm:text-xs lg:text-lg my-3 bg-[#329DFF99] py-1 px-4 sm:px-7 lg:px-14 rounded-lg border lg:border-2 border-white hover:-translate-y-1 hover:scale-110"
+                    type="button" onclick="window.open('https://nitjalandhar.almaconnect.com/alumni')">Find
+                    Alumni</button>
+                </div>
+
+              </div>
+            </div>
+            <div>
+
+            </div>
+          </div>
+
+          <!--Notable Alumni Ends-->
+
+        </div>
+        <!-- Item 4 Ends -->
+
+        <!-- Item 5-->
+
+                <!-- Enter new Alumni here -->
+
+        <!-- Item 5 Ends -->
+
+      </div>
+
+
+
+      <!-- Slider indicators -->
+      <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1"
+          data-carousel-slide-to="0"></button>
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2"
+          data-carousel-slide-to="1"></button>
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
+          data-carousel-slide-to="2"></button>
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4"
+          data-carousel-slide-to="3"></button>
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5"
+          data-carousel-slide-to="4"></button>
+      </div>
+      <!-- Slider controls -->
+      <button type="button"
+        class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        data-carousel-prev>
+        <span
+          class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+          <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none"
+            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          <span class="sr-only">Previous</span>
+        </span>
+      </button>
+      <button type="button"
+        class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        data-carousel-next>
+        <span
+          class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+          <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none"
+            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+          <span class="sr-only">Next</span>
+        </span>
+      </button>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!--donation section starts-->
+
+    <div class="grid items-center font-[Inter] h-[90vh] sm:h-[50vh] lg:h-[90vh]">
+      <div
+        class="mt-2 sm:mt-7 lg:mt-20 lg:mb-4 text-center p-5 sm:p-3 lg:p-5 text-xl sm:text-2xl lg:text-3xl font-bold">
+        <span class="text-[#0054A6]">Engage</span>
+        with NITJ and your fellow alumni
+      </div>
+
+      <div class="flex flex-col sm:flex-row justify-center items-center">
+        <div
+          class="m-1 sm:m-3 lg:m-4 p-3 sm:p-4 bg-white rounded-lg sm:w-[30%] flex-col justify-center align-middle text-center">
+          <div class="text-[#0054A6]">
+            <i class="fa-sharp fa-solid fa-people-line fa-2x lg:fa-3x"></i>
+          </div>
+          <div>
+            <h2 class="text-sm sm:text-base lg:text-lg font-bold">CONNECT</h2>
+          </div>
+          <div>
+            <p class="text-gray-600 text-xs p-1 lg:text-base lg:p-3">Our events and programs help you connect with
+              fellow graduate and NITJ</p>
+          </div>
+          <button
+            class="bg-[#0054A6] rounded hover:bg-[#5F9DF7] text-xs lg:text-base text-white font-bold w-[70%] py-2 px-3 mt-2 sm:mt-4"
+            onclick="window.open('https://nitjalandhar.almaconnect.com/')">CONNECT WITH US</button>
+        </div>
+
+
+
+        <div
+          class="m-1 sm:m-3 lg:m-4 p-3 sm:p-4 bg-white rounded-lg sm:w-[30%] flex-col justify-center align-middle text-center">
+          <div class="text-[#0054A6]">
+            <i class="fa-solid fa-handshake fa-2x lg:fa-3x"></i>
+          </div>
+          <div>
+            <h2 class="text-sm sm:text-base lg:text-lg font-semibold">HIRE</h2>
+          </div>
+          <div>
+            <p class="text-gray-600 text-xs p-1 lg:text-base lg:p-3">NITJ grads and students make great employees.
+              Recruit from NITJ today!</p>
+          </div>
+          <button
+            class="bg-[#0054A6] rounded hover:bg-[#5F9DF7] text-xs lg:text-base text-white font-bold w-[70%] py-2 px-3 mt-2 sm:mt-4"
+            onclick="window.open('https://ctp.nitj.ac.in')">HIRE A GRAD</button>
+        </div>
+
+
+
+        <div
+          class="m-1 sm:m-3 lg:m-4 p-3 sm:p-4 bg-white rounded-lg sm:w-[30%] flex-col justify-center align-middle text-center">
+          <div class="text-[#0054A6]">
+            <i class="fas fa-light fa-hand-holding-heart fa-2x lg:fa-3x"></i>
+          </div>
+          <div>
+            <h2 class="text-sm sm:text-base lg:text-lg font-semibold">GIVE</h2>
+          </div>
+          <div>
+            <p class="text-gray-600 text-xs p-1 lg:text-base lg:p-3">Your annual donations provide scholarships and
+              other support to NITJ</p>
+          </div>
+          <button
+            class="bg-[#0054A6] rounded hover:bg-[#5F9DF7] text-xs lg:text-base text-white font-bold w-[70%] py-2 px-3 mt-2 sm:mt-4"
+            onclick="window.open('https://nitj.ac.in/alumni_fundraising/login')">GIVE TO NITJ</button>
+        </div>
+      </div>
+
+      <div>
+
+      </div>
+
+    </div>
+
+    <!--donation section ends-->
+
+
+
+
+
+    <!--Footer image starts-->
+    <div class="w-full">
+      <img class = "modal-image" src
+="img/footer image.png" alt="footer image">
+    </div>
+    <!--Footer image ends-->
+
+
+
+
+    <!-- === FOOTER Starts === -->
+  <div class="z-10 text-sm md:text-base lg:text-lg">
+    <div class=" bg-[#0054A6] text-white lg:flex-row px-5 pt-5 lg:px-20 h-full flex">
+      <a href="/alumni/alumni.html" target="_blank" class="hover:text-[#82C3FF]">
+        <img class="h-[2.2rem] sm:h-[3.6rem] inline cursor-pointer " src="img/SARC_logo.png" alt="logo">
+      </a>&nbsp;&nbsp;
+      <p class="grid items-center font-semibold text-white lg:text-[20px] hover:text-[#82C3FF]">
+        <a href="/alumni/nitjaa.html" target="_blank">NITJ Alumni Association (NITJAA)</a>
+      </p>
+    </div>
+    <a name="contact_reference"></a>
+    <div class="px-5 pt-3 lg:px-20 bg-[#0054A6] text-white">
+      <div class="pb-[6px] lg:w-[85%]">
+        <i class="fas fa-location-dot pr-[8px]"></i><span class="opacity-90">G.T Road, Amritsar Bypass, Jalandhar,
+          Punjab, India-144008</span>
+      </div>
+      <div class=" pb-[6px]">
+        <a href="https://departments.nitj.ac.in/dept/ipe/Faculty/6430445738bff038a780609d"
+          class="hover:text-[#82C3FF]">
+
+          <div>
+            <span class="font-bold ">Prof. Anish Kumar Sachdeva</span> (Dean Student Welfare & President NITJ Alumni Association)
+        </a>
+
+        <a href="https://departments.nitj.ac.in/dept/tt/Faculty/6430445d38bff038a7807071"
+          class="hover:text-[#82C3FF]">
+
+          <div>
+            <span class="font-bold ">Prof. Monica Sikka </span> (Vice-President, NITJ Alumni Association)
+        </a>
+
+        <a href="https://departments.nitj.ac.in/dept/ipe/Faculty/6430445738bff038a780601a"
+          class="hover:text-[#82C3FF] clear-right">
+
+          <div>
+            <span class="font-bold ">Dr. Ajay Gupta</span> (Chairman, NITJ Alumni Association)
+        </a>
+
+        <a href="https://departments.nitj.ac.in/dept/me/Faculty/6430446638bff038a7807afd"
+          class="hover:text-[#82C3FF]">
+
+          <div>
+            <span class="font-bold ">Dr. Manoj Kumar</span> (Institute Coordinator, NITJ Alumni Association)
+        </a>
+
+
+        <h3 class="opacity-90"><i class="fas fa-envelope mt-1 pr-[8px]"></i> office.alumniaffairs@nitj.ac.in</h3>
+
+      </div>
+        
+        <div class="align-center flex flex-row pb-[14px] clear-both">
+          <i class="fas fa-phone mt-1 pr-[8px]"></i>
+          <h3 class="opacity-90">
+            +91-0181-5037855, 2690301, 2690453, 3082000
+          </h3>
+        </div>
+      </div>
+
+    </div>
+    
+
+  </div>
+
+
+
+  <div class="border-t border-zinc-400 bg-[#0054A6] p-3 text-center text-white">
+    <div class="pb-[10px] text-[12px] lg:pb-0 lg:text-[15px] text-center">
+      &#169; Copyright 2024, All Rights Reserved NIT Jalandhar
+    </div>
+
+    <div class="text-[12px] lg:text-[15px]">
+      <a href="https://www.facebook.com/sarc.nitjalandhar" class="mx-1 hover:underline lg:mx-2 hover:text-[#82C3FF]"
+        target="_blank">
+        <i class="fa-brands fa-facebook"></i>
+      </a>
+      |
+      <a href="https://twitter.com/NITJofficial" class="mx-1 hover:underline lg:mx-2 hover:text-[#82C3FF]"
+        target="_blank">
+        <i class="fab fa-twitter"></i>
+      </a>
+      |
+      <a href="https://www.linkedin.com/in/s-a-r-c-nit-jalandhar-ab6261259"
+        class="mx-1 hover:underline lg:mx-2 hover:text-[#82C3FF]" target="_blank">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
+      |
+      <a href="https://www.instagram.com/nitjofficial/?hl=en" class="mx-1 hover:underline lg:mx-2 hover:text-[#82C3FF]"
+        target="_blank">
+        <i class="fa-brands fa-instagram "></i>
+      </a>
+      |
+      <a href="https://www.youtube.com/c/NITJOfficial" class="mx-1 hover:underline lg:mx-2 hover:text-[#82C3FF]"
+        target="_blank">
+        <i class="fa-brands fa-youtube"></i>
+      </a>
+      |
+      <a href="credits.html" class="mx-1 hover:underline lg:mx-2 hover:text-[#82C3FF]" target="_blank">Credits</a>
+    </div>
+  </div>
+  </div>
+  <!-- === FOOTER Ends === -->
+
+
+
+
+
+  </div>
+
+
+
+</div>
+
+
+  <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
+
+  <script>
+    function Menu(e) {
+      let list = document.querySelector('ul');
+      e.name === 'menu' ? (e.name = "close", list.classList.add('top-[80px]'), list.classList.add('opacity-100')) : (e.name = "menu", list.classList.remove('top-[80px]'), list.classList.remove('opacity-100'))
+    }
+  </script>
+
+
+  <script src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    var slideIndex = 0;
+    carousel();
+    function carousel() {
+      var i;
+      var x = document.getElementsByClassName("[data-carousel-item]");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > x.length) {
+        slideIndex = 1;
+      }
+      x[slideIndex - 1].style.display = "block";
+      setTimeout(carousel, 2500);
+    }
+    var tooltipTriggerList = [].slice.call(
+      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    );
+  // var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  //   return new Tooltip(tooltipTriggerEl);
+  // });
+  </script>
+
+
+  <script>
+    [...document.querySelectorAll('.single-column')].map(column => {
+      column.style.setProperty('--animation', 'slide');
+      column.style.setProperty('height', '200%');
+      column.innerHTML = column.innerHTML + column.innerHTML;
+    });
+   
+var modal = document.getElementById("myModal");
+var modalImg = document.getElementById("img01");
+var span = document.getElementsByClassName("close")[0];
+
+
+function openModal(image) {
+  modal.style.display = "block";
+  modalImg.src = image.src;
+}
+
+
+var images = document.querySelectorAll('.modal-image');
+images.forEach(function(img) {
+  img.addEventListener('click', function() {
+    openModal(img);
+  });
+});
+
+span.onclick = function() {
+  modal.style.display = "none";
+};
+
+
+  </script>
+  <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
+  <script>
+    // Menu toggle functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggles = document.querySelectorAll('.menu-toggle');
+      
+      menuToggles.forEach(toggle => {
+        toggle.addEventListener('click', function() {
+          const targetId = this.getAttribute('data-target');
+          const target = document.getElementById(targetId);
+          
+          // Close all other menus
+          document.querySelectorAll('.collapsible-content').forEach(content => {
+            if (content !== target) {
+              content.classList.remove('open');
+            }
+          });
+          
+          // Toggle current menu
+          target.classList.toggle('open');
+          
+          // Rotate chevron icon
+          const icon = this.querySelector('i');
+          if (target.classList.contains('open')) {
+            icon.style.transform = 'rotate(180deg)';
+          } else {
+            icon.style.transform = 'rotate(0deg)';
+          }
+        });
+      });
+      
+      // Image modal functionality
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      const closeBtn = document.querySelector('.close');
+      
+      document.querySelectorAll('.modal-image, .gallery-img').forEach(img => {
+        img.addEventListener('click', function() {
+          modal.style.display = 'block';
+          modalImg.src = this.src;
+        });
+      });
+      
+      closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+      });
+      
+      // Close modal when clicking outside the image
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+    });
+  </script>
+
+  <!-- <script src="app.js"></script> -->
+
+
+
+
+</body>
+
+</html>
