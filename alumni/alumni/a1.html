@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.5/dist/flowbite.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="icon" type="favicon" href="img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet">
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://kit.fontawesome.com/46aac33939.js" crossorigin="anonymous"></script>
+  
+  <title>Alumni</title>
+  
+  <!-- <style>
+    /* General styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      width: 16rem; /* 64 * 0.25rem = 16rem */
+      background-color: #f9fafb;
+      border-right: 1px solid #e5e7eb;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      z-index: 50;
+      overflow-y: auto;
+    }
+    
+    /* Main content area */
+    .main-content {
+      margin-left: 16rem; /* Same as sidebar width */
+      min-height: 100vh;
+      width: calc(100% - 16rem);
+    }
+    
+    /* Collapsible menu styles */
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    
+    .collapsible-content.open {
+      max-height: 500px; /* Adjust as needed */
+    }
+    
+    /* Gallery styles */
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .gallery-row {
+      display: flex;
+      height: 22vh;
+      gap: 0.5rem;
+    }
+    
+    .gallery-img {
+      flex: 1;
+      object-fit: cover;
+      border-radius: 0.75rem;
+      transition: all 0.5s ease-in-out;
+      cursor: pointer;
+    }
+    
+    .gallery-row:hover .gallery-img {
+      opacity: 0.8;
+      transform: scale(0.98);
+      flex: 0.8;
+    }
+    
+    .gallery-img:hover {
+      transform: scale(1.05);
+      z-index: 10;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      flex: 2;
+      opacity: 1;
+    }
+    
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+    
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    }
+    
+    @keyframes zoom {
+      from {transform: scale(0)}
+      to {transform: scale(1)}
+    }
+    
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    /* Hero section */
+    .hero {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin-bottom: 3rem;
+      overflow: hidden;
+    }
+    
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -10;
+    }
+    
+    /* Content sections */
+    .section {
+      background-color: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      margin: 2rem auto;
+      padding: 1.5rem;
+      max-width: 68vw;
+    }
+    
+    /* Tooltip */
+    .tooltip {
+      position: relative;
+    }
+    
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 180px;
+      background-color: white;
+      color: #000;
+      text-align: center;
+      border-radius: 15px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -90px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style> -->
+  <style>
+    /* General styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      width: 16rem;
+      background-color: #f9fafb;
+      border-right: 1px solid #e5e7eb;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      z-index: 50;
+      overflow-y: auto;
+    }
+    
+    /* Main content area - FIXED */
+    .main-content-wrapper {
+      margin-left: 16rem;
+      width: calc(100% - 16rem);
+      min-height: 100vh;
+    }
+    
+    /* Remove the conflicting .main class that was causing issues */
+    .main-content-wrapper .main {
+      margin-left: 0;
+      width: 100%;
+    }
+
+    /* Collapsible menu styles */
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    
+    .collapsible-content.open {
+      max-height: 500px;
+    }
+
+    /* Your existing gallery, modal, and other styles remain the same */
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .gallery-row {
+      display: flex;
+      height: 22vh;
+      gap: 0.5rem;
+    }
+    
+    .gallery-img {
+      flex: 1;
+      object-fit: cover;
+      border-radius: 0.75rem;
+      transition: all 0.5s ease-in-out;
+      cursor: pointer;
+    }
+    
+    .gallery-row:hover .gallery-img {
+      opacity: 0.8;
+      transform: scale(0.98);
+      flex: 0.8;
+    }
+    
+    .gallery-img:hover {
+      transform: scale(1.05);
+      z-index: 10;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      flex: 2;
+      opacity: 1;
+    }
+
+    /* Your original modal and animation styles */
+    .main {
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+      background: #333;
+    }
+
+    .main img {
+      max-width: 100%;
+      vertical-align: middle;
+      border: 5px solid #FFD66E;
+      box-sizing: border-box;
+      transition: opacity .2s;
+    }
+
+    .main:hover img {
+      opacity: 0.5;
+    }
+
+    .main img:hover {
+      opacity: 1;
+    }
+
+    .main .single-column {
+      width: 33.33%;
+      animation: var(--animation, none) 16s infinite linear;
+    }
+
+    .main .single-column:hover {
+      animation-play-state: paused;
+    }
+
+    .main .single-column:nth-of-type(odd) {
+      align-self: flex-end;
+      --direction: 50%;
+    }
+
+    .tooltiptext {
+      visibility: hidden;
+      width: 180px;
+      background-color: rgb(255, 255, 255);
+      color: #000;
+      text-align: center;
+      border-radius: 15px;
+      padding: 0px;
+      margin-left: 10%;
+      position: absolute;
+      z-index: 1;
+    }
+    
+    #meet_16dec2023:hover .tooltiptext{
+      visibility: visible;
+    }
+
+    @keyframes slide {
+      to {
+        -webkit-transform: translateY(var(--direction, -50%));
+        transform: translateY(var(--direction, -50%));
+      }
+    }
+    
+    .font-times{
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .modal-image {
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .modal-image:hover {
+      opacity: 0.7;
+    }
+    
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 1; 
+      padding-top: 100px; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto; 
+      background-color: rgb(0, 0, 0); 
+      background-color: rgba(0, 0, 0, 0.9); 
+    }
+    
+    .modal-content {
+      margin: auto;
+      width: 100%;
+      max-width: 700px;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    }
+    
+    @keyframes zoom {
+      from {
+        transform: scale(0);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+    
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #ff3939;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    @media only screen and (max-width: 700px) {
+      .modal-content {
+        width: 100%;
+      }
+    }
+</style>
+</head>
+<body>
+  <!-- Fixed Sidebar -->
+  <nav class="sidebar">
+    <!-- Logo & Title -->
+    <div class="p-5 overflow-y-auto">
+      <div class="flex items-center mb-6">
+        <a href="/alumni/alumni.html" target="_blank">
+          <img src="img/logo.png" alt="logo" class="h-10 w-10 mr-3" />
+        </a>
+        <div class="text-[#0054A6] text-sm font-bold leading-tight">
+          <div>NITJ Alumni</div>
+          <div class="text-xs text-gray-600">
+            Dr. B R Ambedkar NIT Jalandhar
+          </div>
+        </div>
+      </div>
+
+      <!-- Menu -->
+      <ul class="space-y-2 text-sm">
+        <!-- 1. Home -->
+        <li>
+          <a
+            href="/index.html"
+            class="flex items-center text-[#0054A6] bg-[#E6F0FB] rounded-md px-3 py-2 font-bold transition-all duration-300 hover:bg-[#dbeafe]"
+          >
+            <i class="fa-solid fa-house mr-2"></i>1. Home
+          </a>
+        </li>
+
+        <!-- 2. Alumni Affair Cell -->
+        <li>
+          <button
+            class="w-full text-left px-3 py-2 rounded-md hover:bg-[#f1f5f9] transition-all duration-300 font-bold text-gray-800 flex justify-between items-center menu-toggle"
+            data-target="affairCell"
+          >
+            2. Alumni Affair Cell
+            <i class="fa-solid fa-chevron-down text-xs ml-2"></i>
+          </button>
+          <ul
+            id="affairCell"
+            class="collapsible-content ml-5 text-gray-600 space-y-1"
+          >
+            <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">2.1 Officer Bearer</a></li>
+            <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">2.2 SARC</a></li>
+          </ul>
+        </li>
+
+        <!-- 3. NITJAA -->
+        <li>
+          <button
+            class="w-full text-left px-3 py-2 rounded-md hover:bg-[#f1f5f9] transition-all duration-300 font-bold text-gray-800 flex justify-between items-center menu-toggle"
+            data-target="nitjaa"
+          >
+            3. NITJAA
+            <i class="fa-solid fa-chevron-down text-xs ml-2"></i>
+          </button>
+          <ul
+            id="nitjaa"
+            class="collapsible-content ml-5 text-gray-600 space-y-1"
+          >
+            <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">3.1 Home</a></li>
+            <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">3.2 Officer Bearer</a></li>
+            <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">3.3 Membership</a></li>
+            <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">3.4 Bylaws</a></li>
+          </ul>
+        </li>
+
+        <!-- 4. Chapters -->
+        <li>
+          <button
+            class="w-full text-left px-3 py-2 rounded-md hover:bg-[#f1f5f9] transition-all duration-300 font-bold text-gray-800 flex justify-between items-center menu-toggle"
+            data-target="chapters"
+          >
+            4. Chapters
+            <i class="fa-solid fa-chevron-down text-xs ml-2"></i>
+          </button>
+          <ul
+            id="chapters"
+            class="collapsible-content ml-5 text-gray-600 space-y-2"
+          >
+            <!-- 4.1 NCR Chapter -->
+            <li>
+              <button
+                class="w-full text-left px-2 py-1 rounded hover:bg-gray-100 transition-all font-semibold flex justify-between items-center menu-toggle"
+                data-target="ncrChapter"
+              >
+                4.1 NCR Chapter
+                <i class="fa-solid fa-chevron-down text-xs ml-2"></i>
+              </button>
+              <ul
+                id="ncrChapter"
+                class="collapsible-content ml-4 space-y-1"
+              >
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.1.1 Home</a></li>
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.1.2 Officer Bearer</a></li>
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.1.3 Membership</a></li>
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.1.4 Bylaws</a></li>
+              </ul>
+            </li>
+
+            <!-- 4.2 USA Chapter -->
+            <li>
+              <button
+                class="w-full text-left px-2 py-1 rounded hover:bg-gray-100 transition-all font-semibold flex justify-between items-center menu-toggle"
+                data-target="usaChapter"
+              >
+                4.2 USA Chapter
+                <i class="fa-solid fa-chevron-down text-xs ml-2"></i>
+              </button>
+              <ul
+                id="usaChapter"
+                class="collapsible-content ml-4 space-y-1"
+              >
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.2.1 Home</a></li>
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.2.2 Officer Bearer</a></li>
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.2.3 Membership</a></li>
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.2.4 Bylaws</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <!-- 5. Giving Back -->
+        <li>
+          <a
+            href="givingback.html"
+            target="_blank"
+            class="block px-3 py-2 rounded-md hover:bg-[#f1f5f9] font-bold text-gray-800 transition-all duration-300"
+          >
+            5. Giving Back
+          </a>
+        </li>
+
+        <!-- 6. Contact -->
+        <li>
+          <a
+            href="#contact_reference"
+            class="block px-3 py-2 rounded-md hover:bg-[#f1f5f9] font-bold text-gray-800 transition-all duration-300"
+          >
+            6. Contact
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Bottom Login Button -->
+    <div class="p-5 border-t border-gray-200">
+      <a href="https://nitj.ac.in/alumni_fundraising/login" target="_blank">
+        <button
+          class="bg-[#0054A6] w-full text-white py-2 px-4 rounded-md shadow-md border-2 border-[#FFD66E] text-sm hover:scale-105 hover:-translate-y-1 transition-all duration-300"
+        >
+          LOGIN
+        </button>
+      </a>
+    </div>
+  </nav>
+<div class="main-content-wrapper">
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <!-- Welcome Section -->
+    <div class="p-8">
+      <h1 class="text-3xl font-bold text-[#0054A6]">Welcome to NITJAA Page</h1>
+      <p class="text-gray-600 mt-4">Your main content goes here. Scroll the page — the sidebar will stay fixed.</p>
+    </div>
+
+    <!-- ALL YOUR EXISTING CONTENT GOES HERE -->
+    <div class="relative max-w-screen flex items-center justify-center h-screen mb-12 overflow-hidden"> <!-- Hero Section -->
+    <div class="hero">
+      <img src="img/registerbg.jpg" alt="NITJ Campus Aerial View" class="hero-bg" />
+      <div class="relative z-30 p-5 text-white bg-opacity-50 rounded-xl flex-none">
+        <!-- Add hero content here if needed -->
+      </div>
+    </div>
+</div>
+    <!-- NITJAA Section --><div class="grid bg-white py-4 sm:py-10 lg:py-16 px-5 sm:px-10 lg:px-[4.5rem] md:w-[68vw] max-w-screen md:rounded-xl mx-auto md:h-auto z-40 relative shadow-xl shadow-gray-700">
+    <div class="section">
+      <h2 class="text-center font-bold text-lg md:text-xl lg:text-2xl my-5 text-black font-sans">
+        <a name="about_nitjaa">NITJ ALUMNI ASSOCIATION (NITJAA)</a>
+      </h2>
+
+      <p class="text-center text-sm md:text-base lg:text-lg text-gray-700 mt-5 mb-9">
+        <i class="fa-sharp fa-solid fa-quote-left text-xl sm:text-4xl lg:text-6xl text-[#FEB7028C] mx-3"></i>
+        NITJAA provides platform for students to interact with well settled alumni's of NITJ. It aids in gaining career
+        advice and gives them direction towards better future by organising annual alumni meet. It renders students with
+        career guidance and tailoring them for their future endeavours. Catering to the betterment of alumni-student
+        relationship of Institute. To furnish alumni with a platform to interact with the students on a one to one basis
+        and connect them with the Institute and provide career advice to prepare for the real world.
+      </p>
+
+      <hr class="border-2 border-[#277BC7] my-6 hidden md:block">
+
+      <p class="text-center text-sm md:text-base lg:text-lg text-gray-700 mt-2 mb-9">
+        <i class="fa-sharp fa-solid fa-quote-left text-xl sm:text-4xl lg:text-6xl text-[#FEB7028C] mx-3"></i>
+        <b>Vision:</b> "To build a rich intellectual potential embedded with interdisciplinary knowledge, human values and professional ethics among the youth, aspirant of becoming engineers and technologists, so that they contribute to society and create a niche for a successful career".
+        <br><br><b>Mission:</b> "To become a leading and unique institution of higher learning, offering state-of-the- art education, research and training in engineering and technology to students who are able and eager to become change agents for the industrial and economic progress of the nation. To nurture and sustain an academic ambience conducive to the development and growth of committed professionals for sustainable development of the nation and to accomplish its integration into the global economy. To strive to be a Swachch NIT providing a guarantee of clean hostel, clean mess, clean water and hygienic & wholesome food to its students".
+      </p>
+    </div>
+</div>
+    <!-- Gallery Section -->
+    <div class="section">
+      <div class="gallery">
+        <!-- Row 1 -->
+        <div class="gallery-row">
+          <img src="./img/utkansh19/1.jpg" alt="gallery image" class="gallery-img">
+          <img src="./img/utkansh19/2.jpg" alt="gallery image" class="gallery-img">
+          <img src="./img/utkansh19/3.jpg" alt="gallery image" class="gallery-img">
+          <img src="./img/utkansh19/4.jpg" alt="gallery image" class="gallery-img">
+        </div>
+
+        <!-- Row 2 -->
+        <div class="gallery-row">
+          <img src="./img/alumni_meet/image-026.jpg" alt="gallery image" class="gallery-img">
+          <img src="./img/alumni_meet/image-027.jpg" alt="gallery image" class="gallery-img">
+          <img src="./img/alumni_meet/image-028.jpg" alt="gallery image" class="gallery-img">
+          <img src="./img/alumni_meet/image-029.jpg" alt="gallery image" class="gallery-img">
+        </div>
+
+        <!-- Row 3 -->
+        <div class="gallery-row">
+          <img src="./img/college_img/1.jpg" alt="gallery image" class="gallery-img">
+          <img src="./img/college_img/2.jpg" alt="gallery image" class="gallery-img">
+          <img src="./img/college_img/3.jpg" alt="gallery image" class="gallery-img">
+          <img src="./img/college_img/4.jpg" alt="gallery image" class="gallery-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- Events Section -->
+    <div class="section">
+      <div class="flex items-center mb-8">
+        <div class="text-[#2167A7] text-xl md:text-2xl font-bold mr-4">
+          UPCOMING EVENTS
+        </div>
+        <div class="flex-grow">
+          <hr class="border-2 border-[#277BC7]">
+        </div>
+      </div>
+
+      <h2 class="text-lg md:text-xl font-bold my-4">
+        <a href="https://www.nitj.ac.in/template/index.html?id=67b850528b69e0412f1149a0?category=newpage">
+          Annual Alumni Meet and Silver Jubilee Celebration on 22nd December 2025
+        </a>
+        <img class="inline" src="https://v1.nitj.ac.in//images/New.gif" alt="New"/>
+      </h2>
+
+      <div class="flex items-center mb-8 mt-12">
+        <div class="text-[#2167A7] text-xl md:text-2xl font-bold mr-4">
+          RECENT EVENTS
+        </div>
+        <div class="flex-grow">
+          <hr class="border-2 border-[#277BC7]">
+        </div>
+      </div>
+
+      <!-- Add more event content here -->
+      <h2 class="text-lg md:text-xl font-bold my-4">
+        Inspiring Guest Lecture by Dr. Rohit Arora, an alumnus of Batch-2014
+        <img class="inline" src="https://v1.nitj.ac.in//images/New.gif" alt="New"/>
+      </h2>
+
+      <div class="mb-8">
+        <p class="text-sm md:text-base text-justify">
+          The department had the pleasure of hosting Dr. Rohit Arora, an accomplished Operations Research Scientist and 
+          proud alumnus of the Batch-2014, for an inspiring guest lecture on 14th August 2025. Currently based in Bangalore, Dr. Arora holds a Ph.D. from the University of British Columbia (UBC), 
+          British Columbia, and has made significant contributions in the field of operations research.
+        </p>
+        <p><a href="https://www.nitj.ac.in/template/index.html?id=68a4588b95ee0cb861df4f90?category=newpage" class="text-blue-600">Read More &rarr;</a></p>
+        <img src="https://nitj.ac.in/files/1755600914898-1000121755.jpg" alt="Lecture image" class="modal-image mx-auto max-w-4xl rounded-xl mt-5 w-full">
+      </div>
+
+      <!-- Add more event sections as needed -->
+    </div>
+
+    <!-- Add other sections (Latest Updates, Notable Alumni, etc.) here -->
+
+    <!-- Footer -->
+    <div class="bg-[#0054A7] text-white p-5">
+      <div class="flex items-center">
+        <a href="/alumni/alumni.html" target="_blank" class="hover:text-[#82C3FF]">
+          <img class="h-10 md:h-14 inline cursor-pointer" src="img/SARC_logo.png" alt="logo">
+        </a>
+        <p class="ml-2 font-semibold text-white md:text-lg hover:text-[#82C3FF]">
+          <a href="/alumni/alumni.html" target="_blank">NITJ Alumni Association (NITJAA)</a>
+        </p>
+      </div>
+      
+      <a name="contact_reference"></a>
+      <div class="mt-4">
+        <div class="mb-2">
+          <i class="fas fa-location-dot mr-2"></i>
+          <span>G.T Road, Amritsar Bypass, Jalandhar, Punjab, India-144008</span>
+        </div>
+        
+        <div class="mb-2">
+          <a href="https://departments.nitj.ac.in/dept/ipe/Faculty/6430445738bff038a780609d" class="hover:text-[#82C3FF]">
+            <span class="font-bold">Prof. Anish Kumar Sachdeva</span> (Dean Student Welfare & President NITJ Alumni Association)
+          </a>
+        </div>
+        
+        <div class="mb-2">
+          <a href="https://departments.nitj.ac.in/dept/tt/Faculty/6430445d38bff038a7807071" class="hover:text-[#82C3FF]">
+            <span class="font-bold">Prof. Monica Sikka</span> (Vice-President, NITJ Alumni Association)
+          </a>
+        </div>
+        
+        <div class="mb-2">
+          <i class="fas fa-envelope mr-2"></i>
+          <span>office.alumniaffairs@nitj.ac.in</span>
+        </div>
+        
+        <div class="mb-2">
+          <i class="fas fa-phone mr-2"></i>
+          <span>+91-0181-5037855, 2690301, 2690453, 3082000</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-zinc-400 bg-[#0054A6] p-3 text-center text-white">
+      <div class="text-sm md:text-base">
+        &#169; Copyright 2024, All Rights Reserved NIT Jalandhar
+      </div>
+      <div class="mt-2 text-sm md:text-base">
+        <!-- Social media links -->
+        <a href="https://www.facebook.com/sarc.nitjalandhar" class="mx-1 hover:underline hover:text-[#82C3FF]" target="_blank">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+        |
+        <a href="https://twitter.com/NITJofficial" class="mx-1 hover:underline hover:text-[#82C3FF]" target="_blank">
+          <i class="fab fa-twitter"></i>
+        </a>
+        |
+        <a href="https://www.linkedin.com/in/s-a-r-c-nit-jalandhar-ab6261259" class="mx-1 hover:underline hover:text-[#82C3FF]" target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+        |
+        <a href="https://www.instagram.com/nitjofficial/?hl=en" class="mx-1 hover:underline hover:text-[#82C3FF]" target="_blank">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        |
+        <a href="https://www.youtube.com/c/NITJOfficial" class="mx-1 hover:underline hover:text-[#82C3FF]" target="_blank">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+        |
+        <a href="credits.html" class="mx-1 hover:underline hover:text-[#82C3FF]" target="_blank">Credits</a>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Image Modal -->
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
+  <script>
+    // Menu toggle functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggles = document.querySelectorAll('.menu-toggle');
+      
+      menuToggles.forEach(toggle => {
+        toggle.addEventListener('click', function() {
+          const targetId = this.getAttribute('data-target');
+          const target = document.getElementById(targetId);
+          
+          // Close all other menus
+          document.querySelectorAll('.collapsible-content').forEach(content => {
+            if (content !== target) {
+              content.classList.remove('open');
+            }
+          });
+          
+          // Toggle current menu
+          target.classList.toggle('open');
+          
+          // Rotate chevron icon
+          const icon = this.querySelector('i');
+          if (target.classList.contains('open')) {
+            icon.style.transform = 'rotate(180deg)';
+          } else {
+            icon.style.transform = 'rotate(0deg)';
+          }
+        });
+      });
+      
+      // Image modal functionality
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      const closeBtn = document.querySelector('.close');
+      
+      document.querySelectorAll('.modal-image, .gallery-img').forEach(img => {
+        img.addEventListener('click', function() {
+          modal.style.display = 'block';
+          modalImg.src = this.src;
+        });
+      });
+      
+      closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+      });
+      
+      // Close modal when clicking outside the image
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
