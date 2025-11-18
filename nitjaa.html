@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.5/dist/flowbite.min.css" />
+  <link rel="stylesheet" href="/style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="icon" type="favicon" href="img/logo.png">
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet">
+
+
+
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="jquery-3.6.3.min.js"></script>
+
+  <script src="https://kit.fontawesome.com/46aac33939.js" crossorigin="anonymous"></script>
+
+  <title>Alumni</title>
+
+<style>
+    /* General styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      width: 16rem;
+      background-color: #f9fafb;
+      border-right: 1px solid #e5e7eb;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      z-index: 50;
+      overflow-y: auto;
+    }
+    
+    /* Main content area - FIXED */
+    .main-content-wrapper {
+      margin-left: 16rem;
+      width: calc(100% - 16rem);
+      min-height: 100vh;
+    }
+    
+    /* Remove the conflicting .main class that was causing issues */
+    .main-content-wrapper .main {
+      margin-left: 0;
+      width: 100%;
+    }
+
+    /* Collapsible menu styles */
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    
+    .collapsible-content.open {
+      max-height: 500px;
+    }
+
+    /* Your existing gallery, modal, and other styles remain the same */
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .gallery-row {
+      display: flex;
+      height: 22vh;
+      gap: 0.5rem;
+    }
+    
+    .gallery-img {
+      flex: 1;
+      object-fit: cover;
+      border-radius: 0.75rem;
+      transition: all 0.5s ease-in-out;
+      cursor: pointer;
+    }
+    
+    .gallery-row:hover .gallery-img {
+      opacity: 0.8;
+      transform: scale(0.98);
+      flex: 0.8;
+    }
+    
+    .gallery-img:hover {
+      transform: scale(1.05);
+      z-index: 10;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      flex: 2;
+      opacity: 1;
+    }
+
+    /* Your original modal and animation styles */
+    .main {
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+      background: #333;
+    }
+
+    .main img {
+      max-width: 100%;
+      vertical-align: middle;
+      border: 5px solid #FFD66E;
+      box-sizing: border-box;
+      transition: opacity .2s;
+    }
+
+    .main:hover img {
+      opacity: 0.5;
+    }
+
+    .main img:hover {
+      opacity: 1;
+    }
+
+    .main .single-column {
+      width: 33.33%;
+      animation: var(--animation, none) 16s infinite linear;
+    }
+
+    .main .single-column:hover {
+      animation-play-state: paused;
+    }
+
+    .main .single-column:nth-of-type(odd) {
+      align-self: flex-end;
+      --direction: 50%;
+    }
+
+    .tooltiptext {
+      visibility: hidden;
+      width: 180px;
+      background-color: rgb(255, 255, 255);
+      color: #000;
+      text-align: center;
+      border-radius: 15px;
+      padding: 0px;
+      margin-left: 10%;
+      position: absolute;
+      z-index: 1;
+    }
+    
+    #meet_16dec2023:hover .tooltiptext{
+      visibility: visible;
+    }
+
+    @keyframes slide {
+      to {
+        -webkit-transform: translateY(var(--direction, -50%));
+        transform: translateY(var(--direction, -50%));
+      }
+    }
+    
+    .font-times{
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .modal-image {
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .modal-image:hover {
+      opacity: 0.7;
+    }
+    
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 1; 
+      padding-top: 100px; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto; 
+      background-color: rgb(0, 0, 0); 
+      background-color: rgba(0, 0, 0, 0.9); 
+    }
+    
+    .modal-content {
+      margin: auto;
+      width: 100%;
+      max-width: 700px;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    }
+    
+    @keyframes zoom {
+      from {
+        transform: scale(0);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+    
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #ff3939;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    @media only screen and (max-width: 700px) {
+      .modal-content {
+        width: 100%;
+      }
+    }
+</style>
+  <style>
+      .main-content-wrapper .main{
+      margin-left: 16rem;
+      width: calc(100% - 16rem);
+      min-height: 100vh;
+    }
+    
+    /* Remove the conflicting .main class that was causing issues */
+    .main-content-wrapper .main {
+      margin-left: 0;
+      width: 100%;
+    }
+    .main {
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+      background: #333;
+    }
+
+    .main img {
+      max-width: 100%;
+      vertical-align: middle;
+      border: 5px solid #FFD66E;
+      box-sizing: border-box;
+      transition: opacity .2s;
+    }
+
+    .main:hover img {
+      opacity: 0.5;
+    }
+
+    .main img:hover {
+      opacity: 1;
+    }
+
+    .main .single-column {
+      width: 33.33%;
+      animation: var(--animation, none) 16s infinite linear;
+    }
+
+    .main .single-column:hover {
+      animation-play-state: paused;
+    }
+
+    .main .single-column:nth-of-type(odd) {
+      align-self: flex-end;
+      --direction: 50%;
+    }
+
+    .tooltiptext {
+      visibility: hidden;
+      width: 180px;
+      background-color: rgb(255, 255, 255);
+      color: #000;
+      text-align: center;
+      border-radius: 15px;
+      padding: 0px;
+      margin-left: 10%;
+
+      /* Position the tooltip */
+      position: absolute;
+      z-index: 1;
+    }
+    #meet_16dec2023:hover .tooltiptext{
+      visibility: visible;
+    }
+
+    @keyframes slide {
+      to {
+        -webkit-transform: translateY(var(--direction, -50%));
+        transform: translateY(var(--direction, -50%));
+      }
+    }
+    .font-times{
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+
+
+
+    .modal-image {
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .modal-image:hover {
+      opacity: 0.7;
+    }
+    
+    
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 1; 
+      padding-top: 100px; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto; 
+      background-color: rgb(0, 0, 0); 
+      background-color: rgba(0, 0, 0, 0.9); 
+    }
+    
+    .modal-content {
+      margin: auto;
+      width: 100%;
+      max-width: 700px
+    }
+    
+    
+    .modal-content {
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    }
+    
+    @keyframes zoom {
+      from {
+        transform: scale(0);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+    
+    
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #ff3939;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    /* 100% Image Width on Smaller Screens */
+    @media only screen and (max-width: 700px) {
+      .modal-content {
+        width: 100%;
+      }
+    }
+    
+  </style>
+  <style>
+    /* General styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      width: 16rem; /* 64 * 0.25rem = 16rem */
+      background-color: #f9fafb;
+      border-right: 1px solid #e5e7eb;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      z-index: 50;
+      overflow-y: auto;
+    }
+    
+    /* Main content area */
+    .main  {
+      margin-left: 16rem; /* Same as sidebar width */
+      min-height: 100vh;
+      width: calc(100% - 16rem);
+    }
+    
+    /* Collapsible menu styles */
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    
+    .collapsible-content.open {
+      max-height: 500px; /* Adjust as needed */
+    }
+    
+    /* Gallery styles */
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .gallery-row {
+      display: flex;
+      height: 22vh;
+      gap: 0.5rem;
+    }
+    
+    .gallery-img {
+      flex: 1;
+      object-fit: cover;
+      border-radius: 0.75rem;
+      transition: all 0.5s ease-in-out;
+      cursor: pointer;
+    }
+    
+    .gallery-row:hover .gallery-img {
+      opacity: 0.8;
+      transform: scale(0.98);
+      flex: 0.8;
+    }
+    
+    .gallery-img:hover {
+      transform: scale(1.05);
+      z-index: 10;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      flex: 2;
+      opacity: 1;
+    }
+    
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+    
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    }
+    
+    @keyframes zoom {
+      from {transform: scale(0)}
+      to {transform: scale(1)}
+    }
+    
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    /* Hero section */
+    .hero {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin-bottom: 3rem;
+      overflow: hidden;
+    }
+    
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -10;
+    }
+    
+    /* Content sections */
+    .section {
+      background-color: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      margin: 2rem auto;
+      padding: 1.5rem;
+      max-width: 68vw;
+    }
+    
+    /* Tooltip */
+    .tooltip {
+      position: relative;
+    }
+    
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 180px;
+      background-color: white;
+      color: #000;
+      text-align: center;
+      border-radius: 15px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -90px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+
+</head> yae header bna do
+<body>
+
+  <!-- Sidebar / Navbar -->
+  <nav class="sidebar">
+    <div class="p-5 overflow-y-auto">
+      <!-- Logo & Title -->
+      <div class="flex items-center mb-6">
+        <a href="/alumni/alumni.html" target="_blank">
+          <img src="img/logo.png" alt="logo" class="h-10 w-10 mr-3" />
+        </a>
+        <div class="text-[#0054A6] text-sm font-bold leading-tight">
+          <div>NITJ Alumni</div>
+          <div class="text-xs text-gray-600">Dr. B R Ambedkar NIT Jalandhar</div>
+        </div>
+      </div>
+
+      <!-- Login Button -->
+      <div class="p-5 border-t border-gray-200">
+        <a href="https://nitj.ac.in/alumni_fundraising/login" target="_blank">
+          <button
+            class="bg-[#0054A6] w-full text-white py-2 px-4 rounded-md shadow-md border-2 border-[#FFD66E] text-sm hover:scale-105 hover:-translate-y-1 transition-all duration-300"
+          >
+            LOGIN
+          </button>
+        </a>
+      </div>
+
+      <!-- Menu -->
+      <ul class="space-y-2 text-sm">
+        <li>
+          <a href="/index.html" class="flex items-center text-[#0054A6] bg-[#E6F0FB] rounded-md px-3 py-2 font-bold transition-all duration-300 hover:bg-[#dbeafe]">
+            1. Home
+          </a>
+        </li>
+
+        <li>
+          <button class="w-full text-left px-3 py-2 rounded-md hover:bg-[#f1f5f9] transition-all duration-300 font-bold text-gray-800 flex justify-between items-center menu-toggle" data-target="affairCell">
+            2. Alumni Affair Cell
+            <i class="fa-solid fa-chevron-down text-xs ml-2"></i>
+          </button>
+          <ul id="affairCell" class="collapsible-content ml-5 text-gray-600 space-y-1">
+            <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">2.1 Officer Bearer</a></li>
+            <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">2.2 SARC</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <button class="w-full text-left px-3 py-2 rounded-md hover:bg-[#f1f5f9] transition-all duration-300 font-bold text-gray-800 flex justify-between items-center menu-toggle" data-target="nitjaa">
+            3. NITJAA
+            <i class="fa-solid fa-chevron-down text-xs ml-2"></i>
+          </button>
+          <ul id="nitjaa" class="collapsible-content ml-5 text-gray-600 space-y-1">
+            <!-- ✅ Smooth scroll links -->
+            <li><a href="#home-nitjaa" class="block px-2 py-1 hover:text-[#0054A6]">3.1 Home</a></li>
+            <li><a href="#officer-bearer" class="block px-2 py-1 hover:text-[#0054A6]">3.2 Officer Bearer</a></li>
+            <li><a href="#membership" class="block px-2 py-1 hover:text-[#0054A6]">3.3 Membership</a></li>
+            <li><a href="#activities" class="block px-2 py-1 hover:text-[#0054A6]">3.4 Activities</a></li>
+            <li><a href="#bylaws" class="block px-2 py-1 hover:text-[#0054A6]">3.5 Bylaws</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <button class="w-full text-left px-3 py-2 rounded-md hover:bg-[#f1f5f9] transition-all duration-300 font-bold text-gray-800 flex justify-between items-center menu-toggle" data-target="chapters">
+            4. Chapters
+            <i class="fa-solid fa-chevron-down text-xs ml-2"></i>
+          </button>
+          <ul id="chapters" class="collapsible-content ml-5 text-gray-600 space-y-2">
+            <li>
+              <button class="w-full text-left px-2 py-1 rounded hover:bg-gray-100 transition-all font-semibold flex justify-between items-center menu-toggle" data-target="ncrChapter">
+                4.1 NCR Chapter
+                <i class="fa-solid fa-chevron-down text-xs ml-2"></i>
+              </button>
+              <ul id="ncrChapter" class="collapsible-content ml-4 space-y-1">
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.1.1 Home</a></li>
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.1.2 Officer Bearer</a></li>
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.1.3 Membership</a></li>
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.1.4 Bylaws</a></li>
+              </ul>
+            </li>
+            <li>
+              <button class="w-full text-left px-2 py-1 rounded hover:bg-gray-100 transition-all font-semibold flex justify-between items-center menu-toggle" data-target="usaChapter">
+                4.2 USA Chapter
+                <i class="fa-solid fa-chevron-down text-xs ml-2"></i>
+              </button>
+              <ul id="usaChapter" class="collapsible-content ml-4 space-y-1">
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.2.1 Home</a></li>
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.2.2 Officer Bearer</a></li>
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.2.3 Membership</a></li>
+                <li><a href="#" class="block px-2 py-1 hover:text-[#0054A6]">4.2.4 Bylaws</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="givingback.html" target="_blank" class="block px-3 py-2 rounded-md hover:bg-[#f1f5f9] font-bold text-gray-800 transition-all duration-300">
+            5. Giving Back
+          </a>
+        </li>
+
+        <li>
+          <a href="#contact_reference" class="block px-3 py-2 rounded-md hover:bg-[#f1f5f9] font-bold text-gray-800 transition-all duration-300">
+            6. Contact
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main content wrapper -->
+  <div class="main-content-wrapper">
+    <section class="nitjaa-container">
+      <h1 class="main-heading">NITJAA (NIT Jalandhar Alumni Association)</h1>
+      <div class="content-area">
+        <div class="main-section">
+          <div class="section" id="home-nitjaa">
+            <h2>3.1 Home (NITJAA)</h2>
+            <ul class="info-list plain-list">
+              <li>Vision Statement</li>
+              <li>Mission Statement</li>
+              <li>Values</li>
+            </ul>
+          </div>
+
+          <div class="section" id="officer-bearer">
+            <h2>3.2 Officer Bearer (NITJAA)</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>Name and Designation</th>
+                  <th>Email ID</th>
+                  <th>Phone No.</th>
+                  <th>Web Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><img src="placeholder1.jpg" alt="Officer 1"></td>
+                  <td>Dr. ABC - President</td>
+                  <td>abc@nitj.ac.in</td>
+                  <td>+91 98765 43210</td>
+                  <td><a href="#">Profile</a></td>
+                </tr>
+                <tr>
+                  <td><img src="placeholder2.jpg" alt="Officer 2"></td>
+                  <td>Mr. XYZ - Secretary</td>
+                  <td>xyz@nitj.ac.in</td>
+                  <td>+91 98765 12345</td>
+                  <td><a href="#">Profile</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="section" id="membership">
+            <h2>3.3 Membership</h2>
+            <ul class="info-list plain-list">
+              <li>Link for the Membership</li>
+              <li>Advantage to Life Member</li>
+              <li>Advantage to Life Alma Mater</li>
+            </ul>
+          </div>
+
+          <div class="section" id="activities">
+            <h2>3.4 Activities</h2>
+            <ul class="info-list plain-list">
+              <li>Recent updates about the activities</li>
+            </ul>
+          </div>
+
+          <div class="section" id="bylaws">
+            <h2>3.5 Bylaws</h2>
+            <p>Details about bylaws will be updated soon.</p>
+          </div>
+        </div>
+
+        <aside class="services">
+          <h3>Services</h3>
+          <ul>
+            <li>Guest House</li>
+            <li>Library</li>
+            <li>Transcripts</li>
+            <li>Insurance policy etc.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </div>
+
+  <!-- JS for Toggle Behavior -->
+  <script>
+    function toggleMenu(id) {
+      const menu = document.getElementById(id);
+      const isOpen = menu.style.maxHeight && menu.style.maxHeight !== "0px";
+
+      document.querySelectorAll("ul[id]").forEach((ul) => {
+        if (ul !== menu) ul.style.maxHeight = null;
+      });
+
+      if (isOpen) {
+        menu.style.maxHeight = null;
+      } else {
+        menu.style.maxHeight = menu.scrollHeight + "px";
+      }
+    }
+
+    document.querySelectorAll(".menu-toggle").forEach((button) => {
+      button.addEventListener("click", () => {
+        toggleMenu(button.getAttribute("data-target"));
+      });
+    });
+  </script>
+
+</body>
+</html>

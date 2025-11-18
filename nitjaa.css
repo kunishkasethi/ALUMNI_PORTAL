@@ -1,0 +1,159 @@
+/* ---------- GENERAL STYLES ---------- */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9fb;
+  margin: 0;
+  padding: 0;
+}
+
+.nitjaa-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px 40px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.main-heading {
+  color: #b30000;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* ---------- LAYOUT ---------- */
+.content-area {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.main-section {
+  flex: 3;
+}
+
+.services {
+  flex: 1;
+  background: #fff7f7;
+  border: 1px solid #f2dcdc;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+}
+
+.services h3 {
+  color: #b30000;
+  margin-bottom: 10px;
+}
+
+.services ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.services li {
+  margin: 6px 0;
+}
+
+/* ---------- SECTIONS ---------- */
+.section {
+  margin-bottom: 40px;
+  background-color: #ffffff;
+  border: 1px solid #ececec;
+  border-radius: 10px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+/* Hover effects */
+.section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  background-color: #fffdfd;
+}
+
+.section:hover h2 {
+  color: #800000;
+}
+
+.section h2 {
+  color: #b30000;
+  border-bottom: 2px solid #b30000;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+  transition: color 0.3s ease;
+}
+
+.info-list li {
+  margin: 8px 0;
+}
+
+.info-list a {
+  color: #0033cc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.info-list a:hover {
+  color: #001a80;
+  text-decoration: underline;
+}
+
+/* ---------- TABLE ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  text-align: center;
+  padding: 10px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+td img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ---------- RESPONSIVE DESIGN ---------- */
+@media (max-width: 900px) {
+  .content-area {
+    flex-direction: column;
+  }
+
+  .services {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  table,
+  th,
+  td {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .nitjaa-container {
+    padding: 15px;
+  }
+
+  .main-heading {
+    font-size: 22px;
+  }
+
+  th,
+  td {
+    padding: 8px;
+  }
+}
