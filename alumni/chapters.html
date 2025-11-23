@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- External libs (same as your site) -->
+  <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.5/dist/flowbite.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet" />
+
+  <title>Chapters - NITJ Alumni</title>
+
+  <style>
+    /* Base / shared with nitjaa */
+    :root{
+      --sidebar-w: 16rem;
+      --accent: #0054A6;
+      --accent-strong: #b30000;
+      --card-bg: #fff;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f9f9fb;
+      color: #111827;
+      overflow-x: hidden;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      width: var(--sidebar-w);
+      background-color: #f9fafb;
+      border-right: 1px solid #e5e7eb;
+      padding: 1rem;
+      overflow-y: auto;
+      z-index: 60;
+    }
+
+    .sidebar img.logo { width: 42px; height: 42px; object-fit: cover; border-radius: 6px; }
+    .brand { display:flex; gap:.6rem; align-items:center; margin-bottom:1rem; }
+    .brand .title { color: var(--accent); font-weight:700; font-size:0.95rem; }
+    .login-btn { margin: .6rem 0 1rem; }
+
+    .menu { list-style: none; padding: 0; margin: 0; font-size: 0.95rem; }
+    .menu li { margin-bottom: .25rem; }
+    .menu a, .menu button {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      width:100%;
+      text-decoration:none;
+      color:#1f2937;
+      padding: .6rem .6rem;
+      border-radius:6px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight:600;
+    }
+    .menu a:hover, .menu button:hover { background: #f1f5f9; color: var(--accent); }
+
+    .collapsible-content { max-height: 0; overflow: hidden; transition: max-height .25s ease; margin-left:.5rem; }
+    .collapsible-content.open { max-height: 1000px; }
+
+    /* Main wrapper */
+    .main-content-wrapper {
+      margin-left: var(--sidebar-w);
+      width: calc(100% - var(--sidebar-w));
+      padding: 2.2rem 2.5rem;
+      min-height: 100vh;
+    }
+
+    .page-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .page-title { color: var(--accent-strong); font-size:1.25rem; font-weight:700; margin-bottom: 1rem; }
+
+    .chapter-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 1.25rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+      margin-bottom: 1.25rem;
+      border: 1px solid #ececec;
+    }
+    .chapter-card h3 { color: var(--accent); margin: 0 0 .6rem 0; }
+    .subsection {
+      margin-top: .8rem;
+      background: #fffdfd;
+      border-left: 4px solid #FFD66E;
+      padding: .8rem;
+      border-radius: 6px;
+    }
+    .subsection h4 { margin:0; color:#b30000; font-size:1rem; }
+
+    /* Table style for Officer Bearer */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: .6rem;
+    }
+    th, td {
+      padding: .6rem;
+      border: 1px solid #ddd;
+      text-align:center;
+      font-size: .95rem;
+    }
+    th { background: #f2f7ff; color: var(--accent); font-weight:700; }
+    td img { width:55px; height:55px; object-fit:cover; border-radius:50%; }
+
+    /* small utilities */
+    .btn-link {
+      display:inline-block;
+      background:#fff;
+      border:1px solid #cbd5e1;
+      padding:.45rem .75rem;
+      border-radius:6px;
+      text-decoration:none;
+      color:#0033cc;
+      margin-top:.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .sidebar { width: 14rem; }
+      .main-content-wrapper { margin-left: 14rem; padding:1rem; }
+    }
+    @media (max-width: 700px) {
+      .sidebar { position: static; width:100%; height: auto; border-right:none; display:block; }
+      .main-content-wrapper { margin-left:0; width:100%; padding:1rem; }
+    }
+
+    /* Highlight active anchor (simple) */
+    .active-anchor { box-shadow: inset 3px 0 0 #FFD66E; padding-left: .5rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar (copied structure so menu looks same) -->
+  <nav class="sidebar" aria-label="Main sidebar">
+    <div class="brand">
+      <a href="/alumni/alumni.html" target="_blank"><img class="logo" src="img/logo.png" alt="logo" /></a>
+      <div>
+        <div class="title">NITJ Alumni</div>
+        <div style="font-size:0.78rem;color:#6b7280;">Dr. B R Ambedkar NIT Jalandhar</div>
+      </div>
+    </div>
+
+    <div class="login-btn">
+      <a href="https://nitj.ac.in/alumni_fundraising/login" target="_blank">
+        <button class="login" style="width:100%; background:var(--accent); color:#fff; border-radius:6px; padding:.5rem; border:2px solid #FFD66E; font-weight:700;">
+          LOGIN
+        </button>
+      </a>
+    </div>
+
+    <ul class="menu">
+      <li><a href="/index.html">1. Home</a></li>
+
+      <li>
+        <button class="menu-toggle" data-target="affairCell">2. Alumni Affair Cell
+          <i class="fa fa-chevron-down" aria-hidden="true"></i>
+        </button>
+        <ul id="affairCell" class="collapsible-content">
+          <li><a href="/alumni/aac.html#officers">2.1 Officer Bearer</a></li>
+          <li><a href="/alumni/aac.html#sarc">2.2 SARC</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <button class="menu-toggle" data-target="nitjaa">3. NITJAA
+          <i class="fa fa-chevron-down" aria-hidden="true"></i>
+        </button>
+        <ul id="nitjaa" class="collapsible-content">
+          <li><a href="/alumni/nitjaa.html#home-nitjaa">3.1 Home</a></li>
+          <li><a href="/alumni/nitjaa.html#officer-bearer">3.2 Officer Bearer</a></li>
+          <li><a href="/alumni/nitjaa.html#membership">3.3 Membership</a></li>
+          <li><a href="/alumni/nitjaa.html#activities">3.4 Activities</a></li>
+          <li><a href="/alumni/nitjaa.html#bylaws">3.5 Bylaws</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <!-- Chapters: this page -->
+        <button class="menu-toggle" data-target="chapters" aria-expanded="true">4. Chapters
+          <i class="fa fa-chevron-down" aria-hidden="true"></i>
+        </button>
+        <ul id="chapters" class="collapsible-content open">
+          <li>
+            <button class="menu-toggle" data-target="ncrChapter">4.1 NCR Chapter
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+            <ul id="ncrChapter" class="collapsible-content open">
+              <li><a href="#ncr-home">4.1.1 Home</a></li>
+              <li><a href="#ncr-officer">4.1.2 Officer Bearer</a></li>
+              <li><a href="#ncr-membership">4.1.3 Membership</a></li>
+              <li><a href="#ncr-activities">4.1.4 Activities</a></li>
+              <li><a href="#ncr-bylaws">4.1.5 Bylaws</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <button class="menu-toggle" data-target="usaChapter">4.2 USA Chapter
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+            <ul id="usaChapter" class="collapsible-content open">
+              <li><a href="#usa-home">4.2.1 Home</a></li>
+              <li><a href="#usa-officer">4.2.2 Officer Bearer</a></li>
+              <li><a href="#usa-membership">4.2.3 Membership</a></li>
+              <li><a href="#usa-activities">4.2.4 Activities</a></li>
+              <li><a href="#usa-bylaws">4.2.5 Bylaws</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li><a href="givingback.html" target="_blank">5. Giving Back</a></li>
+      <li><a href="#contact_reference">6. Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main content -->
+  <div class="main-content-wrapper">
+    <div class="page-container">
+      <h1 class="page-title">4. Chapters</h1>
+
+      <!-- NCR Chapter -->
+      <section class="chapter-card" id="ncr-home" aria-labelledby="ncr-title">
+        <h3 id="ncr-title">4.1 NCR Chapter — Home</h3>
+        <p>
+          NCR Chapter is the local alumni community for the National Capital Region. It organises networking events,
+          industry talks, student mentoring and drives local alumni initiatives. Below you'll find quick links & key
+          information for the NCR chapter.
+        </p>
+
+        <div class="subsection" id="ncr-officer">
+          <h4>4.1.2 Officer Bearer (NCR)</h4>
+          <table aria-label="NCR Officers table">
+            <thead>
+              <tr>
+                <th>Photo</th>
+                <th>Name & Designation</th>
+                <th>Email ID</th>
+                <th>Phone No.</th>
+                <th>Web Link</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><img src="placeholder1.jpg" alt="Officer 1"></td>
+                <td>Dr. A. Kumar — President</td>
+                <td>akumar@example.com</td>
+                <td>+91 98xxxx xxxx</td>
+                <td><a href="#" class="btn-link">Profile</a></td>
+              </tr>
+              <tr>
+                <td><img src="placeholder2.jpg" alt="Officer 2"></td>
+                <td>Ms. S. Sharma — Secretary</td>
+                <td>ssharma@example.com</td>
+                <td>+91 97xxxx xxxx</td>
+                <td><a href="#" class="btn-link">Profile</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="subsection" id="ncr-membership">
+          <h4>4.1.3 Membership (NCR)</h4>
+          <ul style="margin-top:.5rem;">
+            <li><a class="btn-link" href="#">Link for the membership</a></li>
+            <li style="margin-top:.4rem;">Advantage to Life Member: Networking, invites, priority in events.</li>
+            <li style="margin-top:.4rem;">Advantage to Alma Mater: Mentorship, donations, internships pipeline.</li>
+          </ul>
+        </div>
+
+        <div class="subsection" id="ncr-activities">
+          <h4>4.1.4 Activities (NCR)</h4>
+          <p style="margin-top:.5rem;">Recent updates about activities: monthly meetups, career panels, student mentorship drives, fundraising events.</p>
+        </div>
+
+        <div class="subsection" id="ncr-bylaws">
+          <h4>4.1.5 Bylaws (NCR)</h4>
+          <p style="margin-top:.5rem;">The bylaws define membership categories, chapter committees, election processes and fund usage. (Full PDF / document to be uploaded.)</p>
+        </div>
+      </section>
+
+      <!-- USA Chapter -->
+      <section class="chapter-card" id="usa-home" aria-labelledby="usa-title">
+        <h3 id="usa-title">4.2 USA Chapter — Home</h3>
+        <p>
+          USA Chapter is primarily for alumni based in the United States. It focuses on career networking, US-based
+          meetups, and collaboration with campus placements for international opportunities.
+        </p>
+
+        <div class="subsection" id="usa-officer">
+          <h4>4.2.2 Officer Bearer (USA)</h4>
+          <table aria-label="USA Officers table">
+            <thead>
+              <tr>
+                <th>Photo</th>
+                <th>Name & Designation</th>
+                <th>Email ID</th>
+                <th>Phone No.</th>
+                <th>Web Link</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><img src="placeholder3.jpg" alt="Officer 3"></td>
+                <td>Mr. R. Patel — Chapter Head (USA)</td>
+                <td>rpatel@example.com</td>
+                <td>+1 (555) 123-4567</td>
+                <td><a href="#" class="btn-link">Profile</a></td>
+              </tr>
+              <tr>
+                <td><img src="placeholder4.jpg" alt="Officer 4"></td>
+                <td>Ms. L. Mehra — Coordinator</td>
+                <td>lmehra@example.com</td>
+                <td>+1 (555) 987-6543</td>
+                <td><a href="#" class="btn-link">Profile</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="subsection" id="usa-membership">
+          <h4>4.2.3 Membership (USA)</h4>
+          <ul style="margin-top:.5rem;">
+            <li><a class="btn-link" href="#">Membership Registration (USA)</a></li>
+            <li style="margin-top:.4rem;">Benefits: Regional events, mentorship, job-postings newsletter.</li>
+          </ul>
+        </div>
+
+        <div class="subsection" id="usa-activities">
+          <h4>4.2.4 Activities (USA)</h4>
+          <p style="margin-top:.5rem;">Activities: Annual get-togethers, panel discussions with industry pros, virtual webinars for students.</p>
+        </div>
+
+        <div class="subsection" id="usa-bylaws">
+          <h4>4.2.5 Bylaws (USA)</h4>
+          <p style="margin-top:.5rem;">Bylaws and chapter governance details (upload pending).</p>
+        </div>
+      </section>
+
+      <!-- Quick contact -->
+      <section class="chapter-card" id="contact_reference">
+        <h3>Contact</h3>
+        <p>For any chapter-related queries, email <strong>alumni@nitj.ac.in</strong> or use the contact form on the main site.</p>
+      </section>
+    </div>
+  </div>
+
+  <!-- JS: Toggle behavior + smooth scroll + highlight current anchor -->
+  <script>
+    // Toggle collapsible menus (same logic as nitjaa)
+    function toggleMenu(id) {
+      const el = document.getElementById(id);
+      const isOpen = el.classList.contains('open');
+      // close other top-level lists except the clicked path
+      document.querySelectorAll('.collapsible-content').forEach(u => {
+        if (u !== el && !u.contains(el)) {
+          u.classList.remove('open');
+        }
+      });
+      if (isOpen) el.classList.remove('open'); else el.classList.add('open');
+    }
+
+    document.querySelectorAll('.menu-toggle').forEach(btn => {
+      btn.addEventListener('click', function(e){
+        const target = btn.getAttribute('data-target');
+        if (!target) return;
+        toggleMenu(target);
+      });
+    });
+
+    // Smooth scroll for internal anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e){
+        const href = this.getAttribute('href');
+        if (href.length === 1) return;
+        const el = document.querySelector(href);
+        if (el) {
+          e.preventDefault();
+          // close mobile sidebar when clicked (if any)
+          if (window.innerWidth < 700) {
+            // collapse sidebar sections for mobile friendly
+            document.querySelectorAll('.collapsible-content').forEach(u => u.classList.remove('open'));
+          }
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // update active class
+          document.querySelectorAll('.menu a').forEach(i => i.classList.remove('active-anchor'));
+          // find matching nav link and highlight
+          const navLink = document.querySelector('.menu a[href="' + href + '"]');
+          if (navLink) navLink.classList.add('active-anchor');
+        }
+      });
+    });
+
+    // simple on-scroll highlighting for sections (optional)
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      let currentId = null;
+      sections.forEach(s => {
+        const rect = s.getBoundingClientRect();
+        if (rect.top <= 120 && rect.bottom > 120) currentId = s.id;
+      });
+      if (currentId) {
+        document.querySelectorAll('.menu a').forEach(a => a.classList.remove('active-anchor'));
+        const activeLink = document.querySelector('.menu a[href="#' + currentId + '"]');
+        if (activeLink) activeLink.classList.add('active-anchor');
+      }
+    });
+
+    // On load: expand Chapters parent so it's visible
+    document.getElementById('chapters')?.classList.add('open');
+    document.getElementById('ncrChapter')?.classList.add('open');
+    document.getElementById('usaChapter')?.classList.add('open');
+  </script>
+</body>
+</html>
